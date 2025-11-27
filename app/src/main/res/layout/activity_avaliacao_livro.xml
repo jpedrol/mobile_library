@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/blue">
+
+    <!-- Título do Livro -->
+    <TextView
+        android:id="@+id/tvTituloAvaliacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Avaliar: Livro"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center"
+        android:textStyle="bold" />
+
+    <!-- Espaço entre título e avaliação -->
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="16dp" />
+
+    <!-- Estrelas para avaliação -->
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:rating="0"
+        android:stepSize="0.5"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:progressTint="@color/gold_metallic" />  <!-- Cor das estrelas -->
+
+    <!-- Espaço entre a avaliação e o comentário -->
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="16dp" />
+
+    <!-- Campo para comentário do usuário -->
+    <EditText
+        android:id="@+id/edtComentario"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:hint="Deixe seu comentário sobre o livro..."
+        android:gravity="top|start"
+        android:textColor="@color/black"
+        android:background="@drawable/edittext_bg"
+        android:padding="12dp"
+        android:layout_marginTop="16dp"
+        android:inputType="textMultiLine|textCapSentences"
+        android:maxLines="5"
+        android:scrollbars="vertical" />
+
+    <!-- Espaço entre o comentário e o botão -->
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="16dp" />
+
+    <!-- Botão de enviar avaliação (padrão do Android) -->
+    <Button
+        android:id="@+id/btnEnviarAvaliacao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enviar Avaliação"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp" />
+
+</LinearLayout>

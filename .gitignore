@@ -1,0 +1,16 @@
+# Android / IntelliJ
+*.iml
+.gradle/
+.idea/
+local.properties
+/.cxx
+/.externalNativeBuild
+.DS_Store
+
+# Build outputs
+build/
+app/build/
+captures/
+
+# JDK and IntelliJ files
+.jdk.intellij/
