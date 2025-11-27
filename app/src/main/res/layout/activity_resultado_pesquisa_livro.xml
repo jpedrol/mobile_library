@@ -46,16 +46,6 @@
                 android:paddingHorizontal="10dp"
                 android:gravity="center_vertical">
 
-                <ImageButton
-                    android:id="@+id/btnSearch"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:background="@null"
-                    android:contentDescription="Pesquisar"
-                    android:padding="4dp"
-                    android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/ic_search" />
-
                 <EditText
                     android:id="@+id/txtPesquisa"
                     android:layout_width="0dp"
@@ -68,13 +58,16 @@
                     android:background="@null"
                     android:inputType="text" />
 
+                <!-- ÚNICA LUPA, À DIREITA -->
                 <ImageButton
-                    android:id="@+id/btnExcluir"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:id="@+id/btnSearchRight"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:background="@null"
-                    android:src="@drawable/ic_clear"
-                    android:tint="@color/red" />
+                    android:contentDescription="Pesquisar"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ic_search" />
 
             </LinearLayout>
         </RelativeLayout>

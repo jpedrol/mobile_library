@@ -16,5 +16,8 @@
     <color name="text_inverse">#FFFFFF</color>
     <color name="red">#FF0000</color>
     <color name="gold_metallic">#D4AF37</color>
+    <color name="dark_gray">#7A7A7A</color>
+    <color name="chip_background">#EFEFEF</color>
+    <color name="chip_text">#333333</color>
 
 </resources>

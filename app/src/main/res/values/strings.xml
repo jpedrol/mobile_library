@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">Library</string>
     <string name="menu">Menu</string>
+    <string name="descricao_botao_menu">Abrir menu lateral</string>
+    <string name="chatbot_title">Chatbot da Biblioteca</string>
+    <string name="chatbot_subtitle">Perguntas • Dúvidas • Suporte</string>
+    <string name="hint_pergunta">Digite sua pergunta…</string>
+    <string name="content_send">Enviar mensagem</string>
 
 </resources>

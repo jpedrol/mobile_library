@@ -10,45 +10,44 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.ai.client.generativeai.GenerativeModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class ChatBotActivity : AppCompatActivity() {
 
     private lateinit var rvMessages: RecyclerView
     private lateinit var adapter: MessagesAdapter
+    private lateinit var generativeContent: GenerativeModel
 
-    lateinit var generativeContent: GenerativeModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chatbot)
 
-//        geminiClient = GeminiClient(BuildConfig.GEMINI_API_KEY)
-        generativeContent = GenerativeModel("gemini-2.5-flash",
-            BuildConfig.GEMINI_API_KEY)
+        // Inicializa o modelo Gemini
+        generativeContent = GenerativeModel(
+            "gemini-2.5-flash",
+            BuildConfig.GEMINI_API_KEY
+        )
+
+        // Referências da interface
         val btnVoltar   = findViewById<ImageButton>(R.id.btnVoltar)
-        val btnExcluir  = findViewById<ImageButton>(R.id.btnExcluir)
-        val btnPesquisa = findViewById<ImageButton>(R.id.btnSearch)
+        val btnEnviar   = findViewById<ImageButton>(R.id.btnEnviar)
         val txtPergunta = findViewById<EditText>(R.id.txtPergunta)
         rvMessages      = findViewById(R.id.rvMessages)
 
+        // RecyclerView
         adapter = MessagesAdapter(mutableListOf())
         rvMessages.layoutManager = LinearLayoutManager(this)
         rvMessages.adapter = adapter
 
+        // Voltar para o Menu Inicial
         btnVoltar.setOnClickListener {
             val intent = Intent(this, MenuInicialActivity::class.java)
             startActivity(intent)
             finish()
         }
 
-        btnExcluir.setOnClickListener {
-            txtPergunta.setText("")
-            Toast.makeText(this, "Texto apagado", Toast.LENGTH_SHORT).show()
-        }
-
-        btnPesquisa.setOnClickListener {
+        // Enviar mensagem
+        btnEnviar.setOnClickListener {
             val pergunta = txtPergunta.text.toString().trim()
 
             if (pergunta.isEmpty()) {
@@ -56,23 +55,37 @@ class ChatBotActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            // Adiciona a mensagem do usuário
             adapter.addMessage(ChatMessage(pergunta, true))
             rvMessages.scrollToPosition(adapter.itemCount - 1)
 
             txtPergunta.setText("")
 
+            // Envia ao modelo Gemini
             enviarPerguntaGemini(pergunta)
         }
     }
 
     private fun enviarPerguntaGemini(pergunta: String) {
         lifecycleScope.launch {
-            val resposta = generativeContent.generateContent(pergunta)
+            try {
+                val resposta = generativeContent.generateContent(pergunta)
 
-
-            adapter.addMessage(ChatMessage(resposta.text.toString(), false))
-            rvMessages.scrollToPosition(adapter.itemCount - 1)
-        }
+                adapter.addMessage(
+                    ChatMessage(
+                        resposta.text.toString(),
+                        false
+                    )
+                )
+                rvMessages.scrollToPosition(adapter.itemCount - 1)
+            } catch (e: Exception) {
+                adapter.addMessage(
+                    ChatMessage(
+                        "Erro ao gerar resposta. Tente novamente.",
+                        false
+                    )
+                )
+            }
         }
     }
-
+}

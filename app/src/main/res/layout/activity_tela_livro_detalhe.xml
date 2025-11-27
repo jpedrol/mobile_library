@@ -279,15 +279,15 @@
                 android:id="@+id/btnAvaliarLivro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Avaliar Livro"
-                android:textColor="@color/green"
-                android:textStyle="bold"
-                android:textSize="14sp"
-                android:padding="4dp"
                 android:layout_marginStart="8dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:foreground="?attr/selectableItemBackground"/>
+                android:foreground="?attr/selectableItemBackground"
+                android:padding="4dp"
+                android:text="Avaliar Livro"
+                android:textColor="@color/green"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
 
         </LinearLayout>
