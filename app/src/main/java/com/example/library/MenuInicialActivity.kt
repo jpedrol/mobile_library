@@ -2,13 +2,14 @@ package com.example.library
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Gravity
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MenuInicialActivity : AppCompatActivity() {
@@ -22,32 +23,46 @@ class MenuInicialActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu_inicial)
 
+        // carrega livros do SharedPreferences para o repositório em memória
+        LivroRepository.carregarLivros(this)
+
+        // ---------- RECOMENDADOS (HOME) ----------
+        val rvRecomendados = findViewById<RecyclerView>(R.id.rvRecomendados)
+        val livros = LivroRepository.livros
+
+        rvRecomendados.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+
+        rvRecomendados.adapter =
+            RecomendadosHomeAdapter(livros) { position ->
+                val livro = livros[position]
+                val intent = Intent(this, TelaLivroDetalheActivity::class.java)
+                // por enquanto mandamos só o título (usado nas avaliações)
+                intent.putExtra("tituloLivro", livro.title)
+                startActivity(intent)
+            }
+
+        // ---------- MENU LATERAL E BOTÕES ----------
         val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
         drawerLayout.disableSwipeGesture()
 
         val btnMenu        = findViewById<ImageButton>(R.id.btnMenu)
         val btnSearch      = findViewById<ImageButton>(R.id.btnSearch)
-        val btnRefreshPill = findViewById<ImageButton>(R.id.btnRefreshPill)
         val btnChatbot     = findViewById<FloatingActionButton>(R.id.btnChatbot)
         val tvCalendario   = findViewById<TextView>(R.id.tvCalendario)
 
-        val itemAluguelCabines = findViewById<LinearLayout>(R.id.itemAluguelCabines)
         val itemAcessibilidade = findViewById<LinearLayout>(R.id.itemAcessibilidade)
         val itemMenuInicial    = findViewById<LinearLayout>(R.id.itemMenuInicial)
         val itemSair           = findViewById<LinearLayout>(R.id.itemSair)
 
         // abre o menu lateral
         btnMenu.setOnClickListener {
-            drawerLayout.openDrawer(Gravity.START)
+            drawerLayout.openDrawer(GravityCompat.START)
         }
 
-        // fluxo original de pesquisa
+        // busca
         btnSearch.setOnClickListener {
             startActivity(Intent(this, PesquisaActivity::class.java))
-        }
-
-        btnRefreshPill.setOnClickListener {
-            Toast.makeText(this, "Atualizando recomendados…", Toast.LENGTH_SHORT).show()
         }
 
         btnChatbot.setOnClickListener {
@@ -55,15 +70,10 @@ class MenuInicialActivity : AppCompatActivity() {
         }
 
         tvCalendario.setOnClickListener {
-            Toast.makeText(this, "Ir para calendário de eventos", Toast.LENGTH_SHORT).show()
+            // ir para tela de eventos, se quiser no futuro
         }
 
-        fun closeDrawer() = drawerLayout.closeDrawer(Gravity.START)
-
-        itemAluguelCabines.setOnClickListener {
-            Toast.makeText(this, "Aluguel de cabines (em breve)", Toast.LENGTH_SHORT).show()
-            closeDrawer()
-        }
+        fun closeDrawer() = drawerLayout.closeDrawer(GravityCompat.START)
 
         itemAcessibilidade.setOnClickListener {
             closeDrawer()
@@ -71,13 +81,17 @@ class MenuInicialActivity : AppCompatActivity() {
         }
 
         itemMenuInicial.setOnClickListener {
-            // já está na tela inicial
             closeDrawer()
         }
 
+        // *** BOTÃO SAIR — DESLOGAR ***
         itemSair.setOnClickListener {
-            // fecha o app
-            finishAffinity()
+            closeDrawer()
+
+            val intent = Intent(this, LoguinActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
         }
     }
 }

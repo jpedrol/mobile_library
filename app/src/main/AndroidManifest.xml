@@ -42,6 +42,8 @@
             android:exported="false" />
 
         <activity android:name=".AcessibilidadeActivity" />
+        <activity android:name=".RegistrarLivroActivity" />
+        <activity android:name=".EditarLivroActivity" />
 
         <activity
             android:name=".ChatBotActivity"

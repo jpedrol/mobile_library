@@ -21,7 +21,6 @@ class AcessibilidadeActivity : AppCompatActivity() {
 
     private lateinit var itemMenuInicial: LinearLayout
     private lateinit var itemAcessibilidade: LinearLayout
-    private lateinit var itemAluguelCabines: LinearLayout
     private lateinit var itemSair: LinearLayout
     private lateinit var btnSave: Button
 
@@ -31,7 +30,7 @@ class AcessibilidadeActivity : AppCompatActivity() {
 
         prefs = getSharedPreferences("acessibilidade", MODE_PRIVATE)
 
-        // APLICAR ANTES DE DESENHAR A TELA!
+        // aplica antes da view
         applyFontScale()
 
         super.onCreate(savedInstanceState)
@@ -46,21 +45,28 @@ class AcessibilidadeActivity : AppCompatActivity() {
 
         itemMenuInicial = findViewById(R.id.itemMenuInicial)
         itemAcessibilidade = findViewById(R.id.itemAcessibilidade)
-        itemAluguelCabines = findViewById(R.id.itemAluguelCabines)
         itemSair = findViewById(R.id.itemSair)
 
+        // voltar para home
         itemMenuInicial.setOnClickListener {
             startActivity(Intent(this, MenuInicialActivity::class.java))
             finish()
         }
 
+        // já está na tela
         itemAcessibilidade.setOnClickListener {
             drawerLayout.closeDrawer(GravityCompat.START)
         }
 
-        itemAluguelCabines.setOnClickListener {}
+        // ---- BOTÃO SAIR (LOGOUT IGUAL À HOME) ----
+        itemSair.setOnClickListener {
+            drawerLayout.closeDrawer(GravityCompat.START)
 
-        itemSair.setOnClickListener { finishAffinity() }
+            val intent = Intent(this, LoguinActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
+        }
 
         sbFontScale = findViewById(R.id.seekBarFontScale)
         tvFontScaleLabel = findViewById(R.id.tvFontScale)
@@ -84,14 +90,13 @@ class AcessibilidadeActivity : AppCompatActivity() {
         loadPrefs()
 
         btnSave.setOnClickListener {
-
             prefs.edit()
                 .putInt("font_progress", sbFontScale.progress)
                 .apply()
 
             Toast.makeText(this, "Configurações salvas!", Toast.LENGTH_SHORT).show()
 
-            recreate() // AGORA FUNCIONA NA PRIMEIRA
+            recreate()
         }
     }
 
@@ -110,14 +115,8 @@ class AcessibilidadeActivity : AppCompatActivity() {
 
     private fun applyFontScale() {
         val fontScale = prefs.getInt("font_progress", 10) / 10f
-
         val config = resources.configuration
         config.fontScale = fontScale
         resources.updateConfiguration(config, resources.displayMetrics)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        // já aplicado no onCreate antes do layout!
     }
 }

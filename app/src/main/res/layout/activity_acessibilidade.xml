@@ -27,16 +27,15 @@
                 android:id="@+id/btnMenu"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:layout_centerVertical="true"
                 android:layout_marginStart="12dp"
                 android:background="@android:color/transparent"
                 android:padding="12dp"
                 android:contentDescription="Menu"
                 android:scaleType="centerInside"
                 app:srcCompat="@drawable/ic_menu" />
-
         </RelativeLayout>
 
+        <!-- SCROLL PRINCIPAL -->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -76,7 +75,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <!-- TAMANHO DA FONTE -->
                         <TextView
                             android:id="@+id/tvFontScale"
                             android:layout_width="wrap_content"
@@ -102,7 +100,6 @@
                             android:text="Personalize o tamanho dos textos para facilitar a leitura."
                             android:textSize="13sp"
                             android:layout_marginTop="8dp" />
-
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
@@ -119,12 +116,11 @@
                     android:layout_marginTop="6dp"
                     android:layout_marginBottom="14dp"
                     app:cornerRadius="12dp" />
-
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
 
-    <!-- MENU LATERAL IGUAL AO DA HOME -->
+    <!-- MENU LATERAL (SEM CABINES) -->
     <LinearLayout
         android:id="@+id/menuLateral"
         android:layout_width="280dp"
@@ -146,7 +142,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#33000000"/>
+            android:background="#33000000" />
 
         <!-- MENU INICIAL -->
         <LinearLayout
@@ -163,112 +159,77 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_home"
-                android:tint="@color/black" />
+                app:tint="@color/black" />
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="Menu inicial"
                 android:textSize="16sp"
-                android:textColor="@color/black"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
+                android:textColor="@color/black" />
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#33000000"/>
-
-        <!-- ALUGUEL DE CABINES -->
-        <LinearLayout
-            android:id="@+id/itemAluguelCabines"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="16dp"
-            android:gravity="center_vertical"
-            android:clickable="true"
-            android:foreground="?attr/selectableItemBackground">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_cabine"
-                android:tint="@color/black" />
-
-            <TextView
-                android:layout_marginStart="16dp"
-                android:text="Aluguel cabines"
-                android:textSize="16sp"
-                android:textColor="@color/black"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#33000000"/>
+            android:background="#33000000" />
 
         <!-- ACESSIBILIDADE -->
         <LinearLayout
             android:id="@+id/itemAcessibilidade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:padding="16dp"
             android:gravity="center_vertical"
             android:clickable="true"
+            android:orientation="horizontal"
             android:foreground="?attr/selectableItemBackground">
 
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_accessibility"
-                android:tint="@color/black" />
+                app:tint="@color/black" />
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="Acessibilidade"
                 android:textSize="16sp"
-                android:textColor="@color/black"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
+                android:textColor="@color/black" />
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#33000000"/>
+            android:background="#33000000" />
 
         <!-- SAIR -->
         <LinearLayout
             android:id="@+id/itemSair"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:padding="16dp"
             android:gravity="center_vertical"
             android:clickable="true"
+            android:orientation="horizontal"
             android:foreground="?attr/selectableItemBackground">
 
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_logout"
-                android:tint="@color/black" />
+                app:tint="@color/black" />
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="Sair"
                 android:textSize="16sp"
-                android:textColor="@color/black"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
+                android:textColor="@color/black" />
         </LinearLayout>
     </LinearLayout>
 

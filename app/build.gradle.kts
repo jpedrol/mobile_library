@@ -17,8 +17,8 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
+        // 🔥 ADICIONAR ESTA PARTE:
         val geminiApiKey = project.findProperty("GEMINI_API_KEY") as String? ?: ""
-
         buildConfigField(
             "String",
             "GEMINI_API_KEY",
@@ -68,7 +68,9 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("com.google.code.gson:gson:2.11.0")
-    implementation("com.google.ai.client.generativeai:generativeai:0.9.0")
+
+    // 🔥 Biblioteca CORRETA do Gemini
+    implementation("com.google.ai.client.generativeai:generativeai:0.7.0")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <!-- TOPO -->
         <RelativeLayout
             android:id="@+id/topBar"
             android:layout_width="match_parent"
@@ -58,7 +59,6 @@
                     android:background="@null"
                     android:inputType="text" />
 
-                <!-- ÚNICA LUPA, À DIREITA -->
                 <ImageButton
                     android:id="@+id/btnSearchRight"
                     android:layout_width="40dp"
@@ -72,6 +72,7 @@
             </LinearLayout>
         </RelativeLayout>
 
+        <!-- CONTEÚDO -->
         <LinearLayout
             android:id="@+id/contentResultados"
             android:layout_width="match_parent"
@@ -80,42 +81,110 @@
             android:padding="16dp"
             android:layout_below="@id/topBar">
 
+            <!-- Texto: resultado -->
             <TextView
                 android:id="@+id/tvResultadoPara"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Resultado para: ... "
+                android:text="Resultado para: ..."
                 android:textColor="@android:color/white"
                 android:textSize="16sp"
                 android:layout_marginTop="8dp" />
 
-            <ImageView
-                android:id="@+id/imgLivroPrincipal"
-                android:layout_width="200dp"
-                android:layout_height="300dp"
+            <!-- CARD LIVRO PRINCIPAL -->
+            <LinearLayout
+                android:id="@+id/cardPrincipal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp"
                 android:layout_marginTop="12dp"
-                android:layout_gravity="center_horizontal"
-                android:scaleType="centerCrop"
-                android:src="@drawable/livro1" />
+                android:background="@drawable/bg_search_box">
 
+                <ImageView
+                    android:id="@+id/imgLivroPrincipal"
+                    android:layout_width="200dp"
+                    android:layout_height="300dp"
+                    android:layout_gravity="center_horizontal"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_book_placeholder" />
+
+                <TextView
+                    android:id="@+id/tvTituloPrincipal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Título do livro"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp" />
+
+                <TextView
+                    android:id="@+id/tvAutorPrincipal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Autor do livro"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvBaseadoEm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Baseado em: ..."
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+
+            <!-- TÍTULO DA SEÇÃO RECOMENDADO -->
             <TextView
-                android:id="@+id/tvBaseadoEm"
+                android:id="@+id/tvRecomendadoTitulo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Baseado em: ..."
+                android:text="Recomendado para você:"
                 android:textColor="@android:color/white"
                 android:textSize="16sp"
-                android:layout_marginTop="16dp" />
+                android:layout_marginTop="20dp" />
 
-            <ImageView
-                android:id="@+id/imgLivroRecomendado"
-                android:layout_width="200dp"
-                android:layout_height="300dp"
-                android:layout_marginTop="12dp"
-                android:layout_gravity="center_horizontal"
-                android:scaleType="centerCrop"
-                android:src="@drawable/livro2" />
+            <!-- CARD LIVRO RECOMENDADO -->
+            <LinearLayout
+                android:id="@+id/cardRecomendado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_search_box">
+
+                <ImageView
+                    android:id="@+id/imgLivroRecomendado"
+                    android:layout_width="200dp"
+                    android:layout_height="300dp"
+                    android:layout_gravity="center_horizontal"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_book_placeholder" />
+
+                <TextView
+                    android:id="@+id/tvTituloRecomendado"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Título recomendado"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp" />
+
+                <TextView
+                    android:id="@+id/tvAutorRecomendado"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Autor recomendado"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+            </LinearLayout>
 
         </LinearLayout>
+
     </RelativeLayout>
 </ScrollView>

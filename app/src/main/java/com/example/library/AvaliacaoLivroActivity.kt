@@ -15,53 +15,45 @@ class AvaliacaoLivroActivity : AppCompatActivity() {
     private lateinit var ratingBar: RatingBar
     private lateinit var edtComentario: EditText
     private lateinit var btnEnviarAvaliacao: Button
-    private lateinit var btnVoltar: ImageButton   // <-- ADICIONADO
+    private lateinit var btnVoltar: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_avaliacao_livro)
 
-        // Referências aos componentes da UI
         tvTituloAvaliacao = findViewById(R.id.tvTituloAvaliacao)
         ratingBar = findViewById(R.id.ratingBar)
         edtComentario = findViewById(R.id.edtComentario)
         btnEnviarAvaliacao = findViewById(R.id.btnEnviarAvaliacao)
-        btnVoltar = findViewById(R.id.btnVoltar)  // <-- AGORA FUNCIONA
+        btnVoltar = findViewById(R.id.btnVoltar)
 
-        // Botão voltar: volta para a tela anterior (TelaLivroDetalhe)
-        btnVoltar.setOnClickListener {
-            finish()
-        }
+        btnVoltar.setOnClickListener { finish() }
 
-        // Recupera o título do livro passado pela Intent
-        val titulo = intent.getStringExtra("LIVRO_TITULO")
-        if (titulo != null) {
-            tvTituloAvaliacao.text = "Avaliar: $titulo"
-        } else {
-            tvTituloAvaliacao.text = "Livro não encontrado"
-        }
+        val titulo = intent.getStringExtra("LIVRO_TITULO") ?: ""
+        tvTituloAvaliacao.text =
+            if (titulo.isNotEmpty()) "Avaliar: $titulo" else "Livro não encontrado"
 
-        // Ação ao clicar no botão de enviar
         btnEnviarAvaliacao.setOnClickListener {
-            val estrelas = ratingBar.rating
-            val comentario = edtComentario.text.toString()
+            val estrelas = ratingBar.rating.toInt()
+            val comentario = edtComentario.text.toString().trim()
 
-            if (comentario.isNotEmpty()) {
-                Toast.makeText(
-                    this,
-                    "Avaliação enviada: $estrelas estrelas, comentário: $comentario",
-                    Toast.LENGTH_SHORT
-                ).show()
-
-                finish()
-
-            } else {
-                Toast.makeText(
-                    this,
-                    "Por favor, adicione um comentário.",
-                    Toast.LENGTH_SHORT
-                ).show()
+            if (comentario.isEmpty()) {
+                Toast.makeText(this, "Por favor, adicione um comentário.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
+
+            val nomeUsuario = SessionManager.getUserName(this)
+
+            val avaliacao = Avaliacao(
+                usuario = nomeUsuario,
+                estrelas = estrelas,
+                comentario = comentario
+            )
+
+            AvaliacaoStorage.salvarAvaliacao(this, titulo, avaliacao)
+
+            Toast.makeText(this, "Avaliação enviada!", Toast.LENGTH_SHORT).show()
+            finish()
         }
     }
 }

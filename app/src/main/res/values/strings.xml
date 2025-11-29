@@ -6,5 +6,9 @@
     <string name="chatbot_subtitle">Perguntas • Dúvidas • Suporte</string>
     <string name="hint_pergunta">Digite sua pergunta…</string>
     <string name="content_send">Enviar mensagem</string>
+    <string name="adicionar_livro">Adicionar livro</string>
+    <string name="pesquisar">Pesquisar</string>
+    <string name="voltar">Voltar</string>
+    <string name="hint_pesquisa">Que livro você está procurando?</string>
 
 </resources>
