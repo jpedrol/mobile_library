@@ -7,7 +7,6 @@
     android:orientation="vertical"
     android:background="#2196F3">
 
-    <!-- 🔹 Cabeçalho -->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -69,14 +68,12 @@
                 android:orientation="vertical"
                 android:padding="20dp">
 
-                <!-- Layout com imagem à direita -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_marginBottom="16dp">
 
-                    <!-- Campos do formulário à esquerda -->
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -84,7 +81,6 @@
                         android:orientation="vertical"
                         android:layout_marginEnd="12dp">
 
-                        <!-- Campo Nome -->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -103,7 +99,6 @@
                             android:textSize="13sp"
                             android:layout_marginBottom="12dp" />
 
-                        <!-- Campo Tipo -->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -120,7 +115,6 @@
                             android:padding="12dp"
                             android:layout_marginBottom="12dp" />
 
-                        <!-- Campo Local -->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -139,7 +133,6 @@
                             android:textSize="13sp"
                             android:layout_marginBottom="12dp" />
 
-                        <!-- Campo Data e Hora -->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -163,7 +156,6 @@
 
                     </LinearLayout>
 
-                    <!-- Área de Imagem à direita -->
                     <androidx.cardview.widget.CardView
                         android:layout_width="120dp"
                         android:layout_height="160dp"
@@ -227,17 +219,14 @@
                     android:textStyle="bold"
                     android:layout_marginBottom="12dp" />
 
-                <!-- Container de Convidados (inicialmente vazio) -->
                 <LinearLayout
                     android:id="@+id/containerConvidados"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:visibility="gone">
-                    <!-- Os cards de convidados serão adicionados aqui dinamicamente -->
                 </LinearLayout>
 
-                <!-- Card de Convidado (Template - será clonado dinamicamente) -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardConvidadoTemplate"
                     android:layout_width="match_parent"
@@ -253,7 +242,6 @@
                         android:orientation="vertical"
                         android:padding="12dp">
 
-                        <!-- Header com título e botão remover -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -275,7 +263,7 @@
                                 android:id="@+id/btnRemoverConvidado"
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
-                                android:background="@drawable/btn_vermelho_excluir"
+                                android:background="@drawable/btn_vermelho_excluir_circulo"
                                 android:contentDescription="Remover convidado" />
                         </LinearLayout>
 
@@ -317,7 +305,6 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- Botão Adicionar Convidado -->
                 <Button
                     android:id="@+id/btnAdicionarConvidado"
                     android:layout_width="40dp"
@@ -331,7 +318,6 @@
                     android:visibility="gone"
                     android:layout_marginBottom="20dp" />
 
-                <!-- Botão Criar Evento -->
                 <Button
                     android:id="@+id/btnCriarEvento"
                     android:layout_width="match_parent"

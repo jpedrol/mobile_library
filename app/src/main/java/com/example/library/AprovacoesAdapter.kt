@@ -1,6 +1,16 @@
+package com.example.library
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.appcompat.widget.AppCompatButton
+import androidx.recyclerview.widget.RecyclerView
+
+
 class AprovacoesAdapter(
-    private var listaAprovacoes: List<Aprovacao>,
-    private val onItemClick: (Aprovacao) -> Unit
+    private var listaAprovacoes: List<AprovacaoEmprestimo>,
+    private val onItemClick: (AprovacaoEmprestimo) -> Unit
 ) : RecyclerView.Adapter<AprovacoesAdapter.ViewHolder>() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -29,7 +39,7 @@ class AprovacoesAdapter(
 
     override fun getItemCount(): Int = listaAprovacoes.size
 
-    fun atualizarLista(novaLista: List<Aprovacao>) {
+    fun atualizarLista(novaLista: List<AprovacaoEmprestimo>) {
         listaAprovacoes = novaLista
         notifyDataSetChanged()
     }

@@ -1,40 +1,42 @@
-package com.example.library
-
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.library.Evento
+import com.example.library.R
 
 class EventosAdapter(
-private val eventos: List<Evento>,
-private val onItemClick: (Evento) -> Unit
-) : RecyclerView.Adapter<EventosAdapter.EventoViewHolder>() {
+    private var lista: List<Evento>
+) : RecyclerView.Adapter<EventosAdapter.ViewHolder>() {
 
-    inner class EventoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val titulo: TextView = itemView.findViewById(R.id.tvTituloEventoItem)
-        val tipo: TextView = itemView.findViewById(R.id.tvTipoEvento)
-        val horario: TextView = itemView.findViewById(R.id.tvHorarioEvento)
-        val local: TextView = itemView.findViewById(R.id.tvLocalEvento)
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val titulo: TextView = view.findViewById(R.id.tvTituloEvento)
+        val descricao: TextView = view.findViewById(R.id.tvDescricaoEvento)
+        val imagem: ImageView = view.findViewById(R.id.ivImagemEvento)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventoViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_eventos_mes, parent, false)
-        return EventoViewHolder(view)
+            .inflate(R.layout.item_eventos_diarios, parent, false)
+        return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: EventoViewHolder, position: Int) {
-        val evento = eventos[position]
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val evento = lista[position]
+
         holder.titulo.text = evento.titulo
-        holder.tipo.text = evento.tipo
-        holder.horario.text = evento.horario
-        holder.local.text = evento.local
+        holder.descricao.text = evento.descricao
 
-        holder.itemView.setOnClickListener {
-            onItemClick(evento)  // Aqui redireciona para DetalhesEvento
-        }
+        Glide.with(holder.itemView.context)
+            .load(evento.imagem)
+            .into(holder.imagem)
     }
 
-    override fun getItemCount() = eventos.size
+    override fun getItemCount(): Int = lista.size
+
+    fun atualizarLista(nova: List<Evento>) {
+        lista = nova
+        notifyDataSetChanged()
+    }
 }
