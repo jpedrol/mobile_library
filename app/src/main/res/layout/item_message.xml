@@ -1,24 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/messageContainer"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="4dp">
+    android:paddingHorizontal="12dp"
+    android:paddingVertical="6dp">
 
-    <TextView
-        android:id="@+id/tvSender"
+    <!-- Avatar -->
+    <ImageView
+        android:id="@+id/imgAvatar"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:src="@android:drawable/sym_def_app_icon"
+        android:scaleType="centerCrop"
+        android:layout_marginEnd="8dp"
+        android:padding="2dp"/>
+
+    <!-- Mensagem -->
+    <LinearLayout
+        android:id="@+id/bubbleContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textColor="@android:color/white"
-        android:text="Você" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tvMessage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
-        android:layout_marginTop="2dp"
-        android:text="Mensagem aqui" />
+        <TextView
+            android:id="@+id/tvSender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="#555"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/tvMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxWidth="280dp"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:padding="12dp"
+            android:background="@drawable/bubble_neutral"/>
+
+    </LinearLayout>
 
 </LinearLayout>

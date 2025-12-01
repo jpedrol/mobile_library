@@ -1,6 +1,6 @@
 package com.example.library
 
 data class ChatMessage(
-    val text: String,
+    val message: String,
     val isUser: Boolean
 )

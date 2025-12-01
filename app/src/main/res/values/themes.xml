@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.Library" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/blue</item> <!-- opcional -->
+
+    <!-- Tema normal do app -->
+    <style name="Theme.UniforLibrary" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/blue</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
+
+    <!-- Tema de alto contraste -->
+    <style name="Theme.UniforLibrary.HighContrast" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowBackground">#000000</item>
+        <item name="colorOnBackground">#FFFFFF</item>
+
+        <!-- textos brancos -->
+        <item name="android:textColor">#FFFFFF</item>
+
+        <!-- ícones, checkboxes, etc -->
+        <item name="android:colorControlNormal">#FFFFFF</item>
+        <item name="android:colorAccent">#FFFFFF</item>
+
+        <item name="colorSurface">#000000</item>
+        <item name="colorOnSurface">#FFFFFF</item>
+        <item name="colorOnPrimary">#000000</item>
+    </style>
+
 </resources>

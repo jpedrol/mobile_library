@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.library">
 
-    <!-- Permissão para usar internet (Gemini) -->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -14,9 +13,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Library">
+        android:theme="@style/Theme.UniforLibrary">
 
-        <!-- Activity de Login -->
         <activity
             android:name=".LoguinActivity"
             android:exported="true">
@@ -26,7 +24,6 @@
             </intent-filter>
         </activity>
 
-        <!-- Activity de Registro -->
         <activity
             android:name=".RegisterActivity"
             android:exported="false"
@@ -36,17 +33,18 @@
                 android:value=".LoguinActivity" />
         </activity>
 
-        <!-- Menu Inicial -->
         <activity
             android:name=".MenuInicialActivity"
             android:exported="false" />
 
-        <!-- Tela de Detalhes do Livro -->
         <activity
             android:name=".TelaLivroDetalheActivity"
             android:exported="false" />
 
-        <!-- ChatBot -->
+        <activity android:name=".AcessibilidadeActivity" />
+        <activity android:name=".RegistrarLivroActivity" />
+        <activity android:name=".EditarLivroActivity" />
+
         <activity
             android:name=".ChatBotActivity"
             android:exported="false"
@@ -56,7 +54,6 @@
                 android:value=".MenuInicialActivity" />
         </activity>
 
-        <!-- Pesquisa -->
         <activity
             android:name=".PesquisaActivity"
             android:exported="false"
@@ -66,7 +63,6 @@
                 android:value=".MenuInicialActivity" />
         </activity>
 
-        <!-- Resultado da Pesquisa -->
         <activity
             android:name=".ResultadoPesquisaActivity"
             android:exported="false"
@@ -76,7 +72,6 @@
                 android:value=".PesquisaActivity" />
         </activity>
 
-        <!-- Avaliação do Livro -->
         <activity
             android:name=".AvaliacaoLivroActivity"
             android:exported="false" />

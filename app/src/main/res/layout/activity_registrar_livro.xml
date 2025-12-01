@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/blue">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- CARD BRANCO -->
+        <LinearLayout
+            android:orientation="vertical"
+            android:background="@drawable/bg_card_white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp">
+
+            <!-- TOP BAR -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp">
+
+                <ImageButton
+                    android:id="@+id/btnVoltar"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:background="@null"
+                    android:padding="6dp"
+                    app:srcCompat="@drawable/baseline_arrow_back_24"
+                    app:tint="@color/black"
+                    android:contentDescription="Voltar" />
+
+                <TextView
+                    android:id="@+id/txtTituloTela"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="REGISTRAR LIVRO"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true" />
+            </RelativeLayout>
+
+            <!-- TÍTULO -->
+            <TextView
+                android:id="@+id/labelTitulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Título"
+                android:textStyle="bold"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/inputTitulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_input"
+                android:padding="10dp"
+                android:layout_marginBottom="12dp"
+                android:inputType="textCapSentences"
+                android:hint="Digite o título do livro" />
+
+            <!-- AUTOR -->
+            <TextView
+                android:id="@+id/labelAutor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Autor(es)"
+                android:textStyle="bold"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/inputAutor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_input"
+                android:padding="10dp"
+                android:layout_marginBottom="12dp"
+                android:inputType="textCapWords"
+                android:hint="Digite o(s) autor(es)" />
+
+            <!-- IDIOMA COMO TEXTO -->
+            <TextView
+                android:id="@+id/labelIdioma"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Idioma(s)"
+                android:textStyle="bold"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/inputIdioma"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_input"
+                android:padding="10dp"
+                android:layout_marginBottom="20dp"
+                android:inputType="textCapWords"
+                android:hint="Digite o idioma do livro" />
+
+            <!-- CAPA -->
+            <TextView
+                android:id="@+id/labelCapa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Capa"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginBottom="8dp" />
+
+            <FrameLayout
+                android:id="@+id/btnAddCapa"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@drawable/bg_input"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:id="@+id/imgPreview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone"
+                    android:contentDescription="Pré-visualização da capa" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/icoAdd"
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        app:srcCompat="@drawable/ic_add"
+                        android:tint="@color/black"
+                        android:contentDescription="Adicionar capa" />
+
+                    <TextView
+                        android:id="@+id/textAddCapa"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ADICIONAR CAPA"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:layout_marginTop="6dp" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <!-- EXEMPLARES -->
+            <TextView
+                android:id="@+id/labelExemplares"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Exemplares"
+                android:layout_marginTop="16dp"
+                android:textStyle="bold"
+                android:textColor="@color/black" />
+
+            <LinearLayout
+                android:id="@+id/btnAddExemplar"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:gravity="center"
+                android:background="@drawable/bg_add_exemplar"
+                android:layout_marginTop="8dp">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    app:srcCompat="@drawable/ic_add"
+                    app:tint="@color/green"
+                    android:contentDescription="Adicionar exemplar" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ADICIONAR EXEMPLAR"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- BOTÃO FINAL -->
+            <Button
+                android:id="@+id/btnRegistrarLivro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_button_blue"
+                android:text="Registrar livro"
+                android:textColor="@android:color/white"
+                android:padding="14dp"
+                android:textStyle="bold"
+                android:layout_marginTop="24dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

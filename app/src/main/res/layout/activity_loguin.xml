@@ -65,11 +65,11 @@
                 android:id="@+id/inputMatricula"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/edittext_background"
                 android:hint="Ex: 123456"
-                android:background="@drawable/edittext_bg"
-                android:padding="12dp"
                 android:inputType="number"
-                android:layout_marginBottom="16dp" />
+                android:padding="12dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -83,11 +83,11 @@
                 android:id="@+id/inputSenha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/edittext_background"
                 android:hint="********"
-                android:background="@drawable/edittext_bg"
-                android:padding="12dp"
                 android:inputType="textPassword"
-                android:layout_marginBottom="16dp" />
+                android:padding="12dp" />
 
             <TextView
                 android:id="@+id/linkRegistrar"

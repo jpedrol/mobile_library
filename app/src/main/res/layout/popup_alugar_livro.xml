@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/popupRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#80000000"
+    android:gravity="center">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="24dp">
+
+        <LinearLayout
+            android:id="@+id/cardPopup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:background="@drawable/bg_section_card"
+            android:elevation="10dp">
+
+            <!-- TÍTULO -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Alugar livro"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:background="@color/black"
+                android:gravity="center"
+                android:padding="10dp" />
+
+            <!-- CAPA -->
+            <ImageView
+                android:id="@+id/imgPopupCapa"
+                android:layout_width="150dp"
+                android:layout_height="210dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:scaleType="centerCrop" />
+
+            <!-- TÍTULO DO LIVRO -->
+            <TextView
+                android:id="@+id/tvPopupTitulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Título do livro"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/chip_black"
+                android:gravity="center"
+                android:layout_marginTop="8dp" />
+
+            <!-- USUÁRIO -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="12dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_launcher_foreground" />
+
+                <TextView
+                    android:id="@+id/tvPopupUsuario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gabriel Gomes"
+                    android:textStyle="bold"
+                    android:textColor="@color/chip_black"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <!-- LINHA COM OS DOIS DATEPICKERS -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="20dp">
+
+                <!-- BLOCO DATA INÍCIO -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Data de início:"
+                        android:textStyle="bold"
+                        android:textColor="@color/chip_black" />
+
+                    <DatePicker
+                        android:id="@+id/dateInicio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:datePickerMode="spinner"
+                        android:calendarViewShown="false" />
+                </LinearLayout>
+
+                <!-- BLOCO DATA FIM -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Data de devolução:"
+                        android:textStyle="bold"
+                        android:textColor="@color/chip_black" />
+
+                    <DatePicker
+                        android:id="@+id/dateFim"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:datePickerMode="spinner"
+                        android:calendarViewShown="false" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- BOTÃO CONFIRMAR -->
+            <Button
+                android:id="@+id/btnPopupConfirmar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Confirmar aluguel"
+                android:background="@color/blue"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp" />
+
+            <!-- CANCELAR -->
+            <TextView
+                android:id="@+id/btnPopupFechar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cancelar"
+                android:textColor="@color/red"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:padding="10dp"
+                android:layout_marginTop="8dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
