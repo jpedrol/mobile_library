@@ -1,8 +1,6 @@
 [versions]
 agp = "8.13.0"
 kotlin = "2.0.21"
-kotlinSerialization = "2.0.21"
-kotlinxSerializationJson = "1.6.3"
 coreKtx = "1.10.1"
 junit = "4.13.2"
 junitVersion = "1.1.5"
@@ -13,7 +11,6 @@ composeBom = "2024.09.00"
 cronetEmbedded = "141.7340.3"
 
 [libraries]
-androidx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -34,4 +31,3 @@ cronet-embedded = { group = "org.chromium.net", name = "cronet-embedded", versio
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization"}

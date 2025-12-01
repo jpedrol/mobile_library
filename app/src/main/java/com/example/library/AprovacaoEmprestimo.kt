@@ -1,21 +1,19 @@
 package com.example.library
 
 import com.example.library.data.supabase.Usuario
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.SerialName
+import com.google.gson.annotations.SerializedName
 import java.time.LocalDate
 import java.time.LocalDateTime
 
-@Serializable@Serializable
 data class AprovacaoEmprestimo(
     val id: Long? = null,
     val usuario_id: Long,
     val livro_id: Long,
 
-    @SerialName("usuarios")
+    @SerializedName("usuarios")
     val usuario: Usuario,
 
-    @SerialName("livros")
+    @SerializedName("livros")
     val livro: Book,
 
     val data_solicitacao: String? = null, // vem como string ISO

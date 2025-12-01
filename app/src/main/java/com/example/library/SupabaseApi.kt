@@ -3,6 +3,7 @@ package com.example.library.data.supabase
 import com.example.library.AprovacaoEmprestimo
 import com.example.library.Convidado
 import com.example.library.Evento
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -64,18 +65,15 @@ interface SupabaseApi {
     // SupabaseApi.kt
     @GET("eventos")
     suspend fun listarEventos(
-        @Query("select") select: String = "*",
-        @Query("data") dataFilter: String,      // eq.2025-11-01
+        @Query("data_hora") dataInicio: String,
+        @Query("data_hora") dataFim: String,
         @Header("apikey") apiKey: String,
         @Header("Authorization") bearer: String
     ): Response<List<Evento>>
 
-    @GET("rest/v1/reservas?status=eq.Pendente")
+    @GET("rest/v1/emprestimos?status=eq.Pendente&select=*,usuarios(*),livros(*)")
     fun listarAprovacoes(
         @Header("apikey") apiKey: String,
         @Header("Authorization") bearer: String
     ): Call<List<AprovacaoEmprestimo>>
-
-
-
 }

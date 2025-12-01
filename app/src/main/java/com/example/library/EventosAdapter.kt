@@ -13,6 +13,7 @@ class EventosAdapter(
 ) : RecyclerView.Adapter<EventosAdapter.ViewHolder>() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        // As views estão corretas
         val titulo: TextView = view.findViewById(R.id.tvTituloEvento)
         val imagem: ImageView = view.findViewById(R.id.ivImagemEvento)
     }
@@ -26,8 +27,10 @@ class EventosAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val evento = lista[position]
 
+        holder.titulo.text = evento.nome
+
         Glide.with(holder.itemView.context)
-            .load(evento.imagem)
+            .load(evento.imagemUrl)
             .into(holder.imagem)
     }
 
