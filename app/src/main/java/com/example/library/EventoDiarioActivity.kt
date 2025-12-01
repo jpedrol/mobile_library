@@ -58,11 +58,9 @@ class EventoDiarioActivity : AppCompatActivity() {
 // 2. ATRIBUA a variável já inicializada ao RecyclerView
         recyclerEventosDia.adapter = adapter
 
-        // Configura ações dos botões e a UI inicial
         configurarAcoes()
         configurarPermissoesAdmin()
 
-        // Popula a barra de dias e carrega os eventos do dia selecionado
         atualizarUI()
     }
 

@@ -80,6 +80,7 @@
         <activity android:name=".EventoDiarioActivity" />
         <activity android:name=".FormularioEventosActivity" />
         <activity android:name=".AprovacoesActivity" />
+        <activity android:name=".DetalhesEventoActivity" />
     </application>
 
 </manifest>
