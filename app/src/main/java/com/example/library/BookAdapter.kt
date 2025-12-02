@@ -43,7 +43,6 @@ class BookAdapter(
             holder.imgCapa.setImageResource(R.drawable.ic_book_placeholder)
         }
 
-        // 🔥 SE NÃO FOR ADMIN → ESCONDE OS BOTÕES COMPLETAMENTE
         if (isAdmin) {
             holder.btnEditar.visibility = View.VISIBLE
             holder.btnExcluir.visibility = View.VISIBLE
@@ -52,7 +51,6 @@ class BookAdapter(
             holder.btnExcluir.visibility = View.GONE
         }
 
-        // Funções do admin
         holder.btnEditar.setOnClickListener {
             onEdit(livro, position)
         }

@@ -8,7 +8,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 object SupabaseClient {
 
     val api: SupabaseApi by lazy {
-        // Logger (pra ver requisições no Logcat)
         val logging = HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }

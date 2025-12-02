@@ -9,7 +9,6 @@ import androidx.lifecycle.lifecycleScope
 import com.example.library.data.supabase.SupabaseClient
 import com.example.library.data.supabase.SupabaseConfig
 import kotlinx.coroutines.launch
-import androidx.lifecycle.lifecycleScope
 
 class LoguinActivity : AppCompatActivity() {
 
@@ -34,85 +33,90 @@ class LoguinActivity : AppCompatActivity() {
         inputSenha = findViewById(R.id.inputSenha)
 
         btnEntrar.setOnClickListener {
-            val matricula = inputMatricula.text.toString().trim()
-            val senha = inputSenha.text.toString().trim()
 
-            if (matricula.isEmpty() || senha.isEmpty()) {
-                Toast.makeText(this, "Preencha matrícula e senha", Toast.LENGTH_SHORT).show()
-            } else {
-                fazerLogin(matricula, senha)
+            try {
+                val matricula = inputMatricula.text.toString().trim()
+                val senha     = inputSenha.text.toString().trim()
+
+                if (matricula.isEmpty() || senha.isEmpty()) {
+                    Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                val senhaHash = senha
+
+                lifecycleScope.launch {
+                    try {
+                        btnEntrar.isEnabled = false
+
+                        val response = SupabaseClient.api.loginUsuario(
+                            matriculaFilter = "eq.$matricula",
+                            senhaFilter = "eq.$senhaHash",
+                            apiKey = SupabaseConfig.SUPABASE_KEY,
+                            bearer = "Bearer ${SupabaseConfig.SUPABASE_KEY}"
+                        )
+
+                        btnEntrar.isEnabled = true
+
+                        if (!response.isSuccessful) {
+                            Toast.makeText(
+                                this@LoguinActivity,
+                                "Erro ao conectar no servidor (${response.code()})",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            return@launch
+                        }
+
+                        val usuarios = response.body() ?: emptyList()
+
+                        if (usuarios.isEmpty()) {
+                            Toast.makeText(
+                                this@LoguinActivity,
+                                "Matrícula ou senha inválidos",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            return@launch
+                        }
+
+                        val usuario = usuarios[0]
+
+                        val role = if (usuario.tipo_usuario.uppercase() == "ADMIN") {
+                            "admin"
+                        } else {
+                            "user"
+                        }
+
+                        val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+                        prefs.edit()
+                            .putString(KEY_ROLE, role)
+                            .putString(KEY_MATRICULA, usuario.matricula)
+                            .apply()
+
+                        startActivity(
+                            Intent(this@LoguinActivity, MenuInicialActivity::class.java)
+                        )
+                        finish()
+
+                    } catch (e: Exception) {
+                        btnEntrar.isEnabled = true
+                        Log.e("LoguinActivity", "Erro na chamada Supabase", e)
+                        Toast.makeText(
+                            this@LoguinActivity,
+                            "Erro ao fazer login: ${e.message}",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    } finally {
+                    }
+                }
+
+            } catch (e: Exception) {
+                Log.e("LoguinActivity", "Erro ao abrir a próxima tela", e)
+                Toast.makeText(this, "Erro: ${e.message}", Toast.LENGTH_LONG).show()
             }
         }
 
         linkRegistrar.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
-        }
-    }
-
-    private fun fazerLogin(matricula: String, senha: String) {
-        val senhaHash = senha // depois vocês podem aplicar hash
-
-        btnEntrar.isEnabled = false
-
-        lifecycleScope.launch {
-            try {
-                val api = SupabaseClient.api
-
-                val response = api.login(
-                    matriculaFilter = "eq.$matricula",
-                    senhaHashFilter = "eq.$senhaHash",
-                    apiKey = SupabaseConfig.SUPABASE_KEY,
-                    bearer = "Bearer ${SupabaseConfig.SUPABASE_KEY}"
-                )
-
-                btnEntrar.isEnabled = true
-
-                if (response.isSuccessful) {
-                    val usuarios = response.body()
-
-                    if (!usuarios.isNullOrEmpty()) {
-                        val usuario = usuarios[0]
-
-                        // se quiser, salva os dados no SharedPreferences
-                        val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
-                        prefs.edit()
-                            .putString(KEY_MATRICULA, matricula)
-                            .putString(KEY_ROLE, usuario.tipo_usuario ?: "user")
-                            .apply()
-
-                        Toast.makeText(
-                            this@LoguinActivity,
-                            "Bem-vindo, ${usuario.nome_completo}",
-                            Toast.LENGTH_SHORT
-                        ).show()
-
-                        startActivity(Intent(this@LoguinActivity, MenuInicialActivity::class.java))
-                        finish()
-
-                    } else {
-                        Toast.makeText(
-                            this@LoguinActivity,
-                            "Matrícula ou senha inválidos",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                } else {
-                    Toast.makeText(
-                        this@LoguinActivity,
-                        "Erro no login: ${response.code()}",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-
-            } catch (e: Exception) {
-                btnEntrar.isEnabled = true
-                Log.e("LoguinActivity", "Erro no login", e)
-                Toast.makeText(
-                    this@LoguinActivity,
-                    "Falha na conexão: ${e.message}",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
         }
     }
 }

@@ -10,7 +10,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Top Bar -->
         <RelativeLayout
             android:id="@+id/topBar"
             android:layout_width="match_parent"
@@ -28,7 +27,6 @@
                 android:tint="@color/black" />
         </RelativeLayout>
 
-        <!-- Título -->
         <TextView
             android:id="@+id/tvTituloLivro"
             android:layout_width="match_parent"
@@ -39,7 +37,6 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <!-- Capa -->
         <ImageView
             android:id="@+id/imgCapaLivro"
             android:layout_width="220dp"
@@ -49,7 +46,6 @@
             android:scaleType="centerCrop"
             android:src="@drawable/ic_book_placeholder" />
 
-        <!-- Avaliações resumo -->
         <TextView
             android:id="@+id/tvResumoAvaliacoes"
             android:layout_width="match_parent"
@@ -61,7 +57,6 @@
             android:textSize="16sp"
             android:textStyle="bold" />
 
-        <!-- Botão alugar -->
         <Button
             android:id="@+id/btnAlugar"
             android:layout_width="wrap_content"
@@ -74,7 +69,6 @@
             android:textColor="@color/white"
             android:textStyle="bold"/>
 
-        <!-- Título Avaliações -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -86,7 +80,6 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <!-- Lista de avaliações -->
         <LinearLayout
             android:id="@+id/layoutAvaliacoes"
             android:layout_width="match_parent"
@@ -96,7 +89,6 @@
             android:orientation="vertical"
             android:padding="12dp" />
 
-        <!-- Botão avaliar -->
         <Button
             android:id="@+id/btnAvaliarLivro"
             android:layout_width="wrap_content"

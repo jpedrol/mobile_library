@@ -30,7 +30,6 @@ class AcessibilidadeActivity : AppCompatActivity() {
 
         prefs = getSharedPreferences("acessibilidade", MODE_PRIVATE)
 
-        // aplica antes da view
         applyFontScale()
 
         super.onCreate(savedInstanceState)
@@ -47,18 +46,15 @@ class AcessibilidadeActivity : AppCompatActivity() {
         itemAcessibilidade = findViewById(R.id.itemAcessibilidade)
         itemSair = findViewById(R.id.itemSair)
 
-        // voltar para home
         itemMenuInicial.setOnClickListener {
             startActivity(Intent(this, MenuInicialActivity::class.java))
             finish()
         }
 
-        // já está na tela
         itemAcessibilidade.setOnClickListener {
             drawerLayout.closeDrawer(GravityCompat.START)
         }
 
-        // ---- BOTÃO SAIR (LOGOUT IGUAL À HOME) ----
         itemSair.setOnClickListener {
             drawerLayout.closeDrawer(GravityCompat.START)
 

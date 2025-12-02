@@ -123,9 +123,8 @@ class ChatBotActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chatbot)
 
-        // Modelo Gemini (usando a chave do BuildConfig)
         model = GenerativeModel(
-            modelName = "gemini-2.5-flash",
+            modelName = "gemini-1.5-flash",
             apiKey = BuildConfig.GEMINI_API_KEY
         )
 
@@ -139,7 +138,6 @@ class ChatBotActivity : AppCompatActivity() {
         rvMessages.adapter = adapter
 
         btnVoltar.setOnClickListener {
-            // Se quiser voltar pro MenuInicialActivity
             startActivity(Intent(this, MenuInicialActivity::class.java))
             finish()
         }
@@ -152,7 +150,6 @@ class ChatBotActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // Mensagem do usuário
             adapter.addMessage(ChatMessage(pergunta, true))
             rvMessages.scrollToPosition(adapter.itemCount - 1)
             txtPergunta.setText("")
@@ -180,13 +177,10 @@ class ChatBotActivity : AppCompatActivity() {
                 $REQUISITOS_DO_PROJETO
             """.trimIndent()
 
-                // Prompt final combinado
                 val promptFinal = "$systemPrompt\n\nPergunta do usuário: $pergunta"
 
-                // >>> CHAMADA CORRETA PARA O GEMINI <<<
                 val response = model.generateContent(promptFinal)
 
-                // >>> FORMA CORRETA DE PEGAR O TEXTO <<<
                 val texto = response.text ?: "Sem resposta."
 
                 adapter.addMessage(ChatMessage(texto, false))

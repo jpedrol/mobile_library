@@ -1,42 +1,54 @@
-package com.example.library.data.supabase
+    package com.example.library.data.supabase
 
-import retrofit2.Response
-import retrofit2.http.*
+    import retrofit2.Response
+    import retrofit2.http.*
 
-interface SupabaseApi {
+    interface SupabaseApi {
 
-    // LOGIN = SELECT com filtros
-    @GET("usuarios")
-    suspend fun login(
-        @Query("select")
-        select: String = "id,nome_completo,email,matricula,total_lidos,tipo_usuario",
+        @GET("usuarios")
+        suspend fun loginUsuario(
+            @Query("matricula") matriculaFilter: String,
+            @Query("senha_hash") senhaFilter: String,
+            @Query("select") select: String = "id,nome_completo,email,matricula,tipo_usuario",
+            @Query("limit") limit: Int = 1,
 
-        @Query("matricula")
-        matriculaFilter: String,       // eq.2025001
+            @Header("apikey") apiKey: String,
+            @Header("Authorization") bearer: String
+        ): Response<List<Usuario>>
 
-        @Query("senha_hash")
-        senhaHashFilter: String,       // eq.algumaCoisa
 
-        @Query("limit")
-        limit: Int = 1,
+        @GET("usuarios")
+        suspend fun login(
+            @Query("select")
+            select: String = "id,nome_completo,email,matricula,total_lidos,tipo_usuario",
 
-        @Header("apikey")
-        apiKey: String,
+            @Query("matricula")
+            matriculaFilter: String,
 
-        @Header("Authorization")
-        bearer: String
-    ): Response<List<Usuario>>
+            @Query("senha_hash")
+            senhaHashFilter: String,
 
-    // REGISTRO = INSERT
-    @Headers("Prefer: return=representation")
-    @POST("usuarios")
-    suspend fun registrar(
-        @Body novoUsuario: UsuarioInsert,
+            @Query("limit")
+            limit: Int = 1,
 
-        @Header("apikey")
-        apiKey: String,
+            @Header("apikey")
+            apiKey: String,
 
-        @Header("Authorization")
-        bearer: String
-    ): Response<List<Usuario>>
-}
+            @Header("Authorization")
+            bearer: String
+        ): Response<List<Usuario>>
+
+        @Headers("Prefer: return=representation")
+
+
+        @POST("usuarios")
+        suspend fun registrar(
+            @Body novoUsuario: UsuarioInsert,
+
+            @Header("apikey")
+            apiKey: String,
+
+            @Header("Authorization")
+            bearer: String
+        ): Response<List<Usuario>>
+    }

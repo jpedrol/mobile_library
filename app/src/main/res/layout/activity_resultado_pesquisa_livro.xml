@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!-- TOPO -->
         <RelativeLayout
             android:id="@+id/topBar"
             android:layout_width="match_parent"
@@ -72,7 +71,6 @@
             </LinearLayout>
         </RelativeLayout>
 
-        <!-- CONTEÚDO -->
         <LinearLayout
             android:id="@+id/contentResultados"
             android:layout_width="match_parent"
@@ -81,7 +79,6 @@
             android:padding="16dp"
             android:layout_below="@id/topBar">
 
-            <!-- Texto: resultado -->
             <TextView
                 android:id="@+id/tvResultadoPara"
                 android:layout_width="wrap_content"
@@ -91,7 +88,6 @@
                 android:textSize="16sp"
                 android:layout_marginTop="8dp" />
 
-            <!-- CARD LIVRO PRINCIPAL -->
             <LinearLayout
                 android:id="@+id/cardPrincipal"
                 android:layout_width="match_parent"
@@ -137,7 +133,6 @@
                     android:layout_marginTop="8dp" />
             </LinearLayout>
 
-            <!-- TÍTULO DA SEÇÃO RECOMENDADO -->
             <TextView
                 android:id="@+id/tvRecomendadoTitulo"
                 android:layout_width="wrap_content"
@@ -147,7 +142,6 @@
                 android:textSize="16sp"
                 android:layout_marginTop="20dp" />
 
-            <!-- CARD LIVRO RECOMENDADO -->
             <LinearLayout
                 android:id="@+id/cardRecomendado"
                 android:layout_width="match_parent"

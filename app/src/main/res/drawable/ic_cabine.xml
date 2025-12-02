@@ -4,17 +4,14 @@
     android:viewportWidth="24"
     android:viewportHeight="24">
 
-    <!-- Tela -->
     <path
         android:fillColor="#000000"
         android:pathData="M2,4h20v12H2z"/>
 
-    <!-- Suporte -->
     <path
         android:fillColor="#000000"
         android:pathData="M11,16h2v3h-2z"/>
 
-    <!-- Base -->
     <path
         android:fillColor="#000000"
         android:pathData="M7,19h10v2H7z"/>
