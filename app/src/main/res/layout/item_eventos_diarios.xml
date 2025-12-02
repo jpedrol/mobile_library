@@ -9,32 +9,69 @@
     android:gravity="center_vertical"
     android:background="#FFFFFF">
 
+    <!-- 1. Imagem do Evento -->
+    <ImageView
+        android:id="@+id/ivEvento"
+        android:layout_width="60dp"
+        android:layout_height="80dp"
+        android:scaleType="centerCrop"
+        android:layout_marginEnd="12dp"
+        android:background="#E0E0E0"
+        android:contentDescription="@string/imagem_do_evento" />
+
+    <!-- 2. Bloco de Informações -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical">
 
+        <!-- Nome do Evento -->
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/tvNomeEvento"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#000"
             android:textSize="16sp"
             android:textStyle="bold"/>
 
+        <!-- Tipo do Evento com Ícone (CORRIGIDO) -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="2dp">
+
+            <ImageView
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_livro_aberto"
+                app:tint="#777"/>
+
+            <TextView
+                android:id="@+id/tvTipoEvento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:textSize="12sp"
+                android:textColor="#555"/>
+        </LinearLayout>
+
+        <!-- Detalhes: Horário e Local -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="6dp">
 
+            <!-- Horário -->
             <ImageView
                 android:layout_width="14dp"
                 android:layout_height="14dp"
                 android:src="@drawable/clock_outline"
                 app:tint="#777"/>
-
             <TextView
                 android:id="@+id/tvHorarioEvento"
                 android:layout_width="wrap_content"
@@ -44,13 +81,13 @@
                 android:textColor="#777"
                 android:textSize="12sp"/>
 
+            <!-- Local -->
             <ImageView
                 android:layout_width="14dp"
                 android:layout_height="14dp"
                 android:importantForAccessibility="no"
                 android:src="@drawable/map_marker_outline"
                 app:tint="#777"/>
-
             <TextView
                 android:id="@+id/tvLocalEvento"
                 android:layout_width="wrap_content"
@@ -60,11 +97,14 @@
                 android:textSize="12sp"/>
         </LinearLayout>
 
+        <!-- Convidados -->
         <LinearLayout
+            android:id="@+id/layoutConvidados"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="6dp">
+            android:layout_marginTop="6dp"
+            android:visibility="gone">
 
             <ImageView
                 android:layout_width="14dp"
@@ -72,7 +112,6 @@
                 android:importantForAccessibility="no"
                 android:src="@drawable/group_outline"
                 app:tint="#777"/>
-
             <TextView
                 android:id="@+id/tvConvidadosEvento"
                 android:layout_width="wrap_content"
@@ -84,6 +123,7 @@
 
     </LinearLayout>
 
+    <!-- 3. Seta para Detalhes -->
     <ImageView
         android:id="@+id/iconeSeta"
         android:layout_width="24dp"

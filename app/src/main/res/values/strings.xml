@@ -12,5 +12,6 @@
     <string name="voltar">Voltar</string>
     <string name="hint_pesquisa">Que livro você está procurando?</string>
     <string name="eventos">Eventos\n</string>
+    <string name="imagem_do_evento">Banner do evento\n</string>
 
 </resources>

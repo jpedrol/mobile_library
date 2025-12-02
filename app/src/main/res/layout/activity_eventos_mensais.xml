@@ -86,9 +86,10 @@
                     android:layout_marginBottom="16dp" />
 
 
-                <!-- 🔸 Título dos próximos eventos --><RelativeLayout
+                <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp">
 
                 <TextView
                     android:id="@+id/tvTituloEventosDia"
@@ -106,7 +107,8 @@
                     android:layout_height="30dp"
                     android:layout_alignParentEnd="true"
                     android:background="@drawable/btn_add_evento"
-                    android:contentDescription="Adicionar eveneto"/>
+                    android:visibility="gone"
+                    android:contentDescription="Adicionar evento"/>
             </RelativeLayout>
                 <!-- 🔸 RecyclerView dos próximos eventos -->
                 <androidx.recyclerview.widget.RecyclerView

@@ -13,13 +13,12 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.library.data.supabase.SupabaseApi
 import com.example.library.data.supabase.SupabaseClient
 import com.example.library.data.supabase.SupabaseConfig
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.text.replaceFirstChar
-import kotlin.text.titlecase
 
 class EventoDiarioActivity : AppCompatActivity() {
 
@@ -28,7 +27,7 @@ class EventoDiarioActivity : AppCompatActivity() {
     private lateinit var tvTituloPagina: TextView
     private lateinit var containerDiasMes: LinearLayout
     private lateinit var recyclerEventosDia: RecyclerView
-    private lateinit var adapter: EventosAdapter
+    private lateinit var adapter: EventosDiariosAdapter
 
     private var calendario = Calendar.getInstance()
 
@@ -49,18 +48,33 @@ class EventoDiarioActivity : AppCompatActivity() {
         recyclerEventosDia = findViewById(R.id.recyclerEventosDia)
 
 
-// Configura o RecyclerView
+        // Configura o RecyclerView
         recyclerEventosDia.layoutManager = LinearLayoutManager(this)
 
-// 1. INICIALIZE a sua variável de classe 'adapter'
-        adapter = EventosAdapter(kotlin.collections.emptyList()) // pode usar emptyList() diretamente
 
-// 2. ATRIBUA a variável já inicializada ao RecyclerView
+
+        adapter = EventosDiariosAdapter(kotlin.collections.emptyList()) { eventoClicado ->
+            val intent = Intent(this, DetalhesEventoActivity::class.java)
+
+            // --- 👇 PASSE OS DADOS DO EVENTO AQUI 👇 ---
+            intent.putExtra("EVENTO_ID", eventoClicado.id)
+            intent.putExtra("EVENTO_NOME", eventoClicado.nome)
+            intent.putExtra("EVENTO_TIPO", eventoClicado.tipo)
+            intent.putExtra("EVENTO_LOCAL", eventoClicado.local)
+            intent.putExtra("EVENTO_DATA_HORA", eventoClicado.dataHora)
+            intent.putExtra("EVENTO_DESCRICAO", eventoClicado.descricao)
+            intent.putExtra("EVENTO_IMAGEM_URL", eventoClicado.imagemUrl)
+            // -----------------------------------------
+
+            startActivity(intent)
+
+        }
+
+
         recyclerEventosDia.adapter = adapter
 
         configurarAcoes()
         configurarPermissoesAdmin()
-
         atualizarUI()
     }
 
@@ -79,16 +93,21 @@ class EventoDiarioActivity : AppCompatActivity() {
     }
 
     private fun configurarPermissoesAdmin() {
-        val isAdmin = SessionManager.isAdmin(this)
+        val prefs = getSharedPreferences("auth_prefs", MODE_PRIVATE)
+        val role = prefs.getString("role", "user")
+        val isAdmin = (role == "admin")
+
         btnAddEvento.visibility = if (isAdmin) View.VISIBLE else View.GONE
     }
 
     private fun atualizarUI() {
         // Atualiza o título da página com o mês e ano
+        // Em atualizarUI()
         val formatoTitulo = SimpleDateFormat("MMMM, yyyy", Locale.getDefault())
-        tvTituloPagina.text = formatoTitulo.format(calendario.time).replaceFirstChar { it.titlecase() }
+        var tituloFormatado = formatoTitulo.format(calendario.time)
+        tvTituloPagina.text =
+            tituloFormatado.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
 
-        // Popula a barra de dias e carrega os eventos
         popularDiasDoMes()
         carregarEventosDoDiaAtual()
     }
@@ -101,12 +120,14 @@ class EventoDiarioActivity : AppCompatActivity() {
 
         for (i in 1..diasNoMes) {
             mesAtual.set(Calendar.DAY_OF_MONTH, i)
-            val diaView = LayoutInflater.from(this).inflate(R.layout.item_dia_do_mes, containerDiasMes, false)
+            val diaView =
+                LayoutInflater.from(this).inflate(R.layout.item_dia_do_mes, containerDiasMes, false)
             val tvDia: TextView = diaView.findViewById(R.id.tvDia)
             val tvDiaSemana: TextView = diaView.findViewById(R.id.tvDiaSemana)
 
             tvDia.text = i.toString()
-            tvDiaSemana.text = SimpleDateFormat("E", Locale.getDefault()).format(mesAtual.time).take(3)
+            tvDiaSemana.text =
+                SimpleDateFormat("E", Locale.getDefault()).format(mesAtual.time).take(3)
 
             // Destaca o dia selecionado
             if (mesAtual.get(Calendar.DAY_OF_YEAR) == diaSelecionado) {
@@ -129,21 +150,31 @@ class EventoDiarioActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             try {
-                val response = SupabaseClient.api.listarEventos(
-                    dataInicio = "gte.${dataQuery}T00:00:00",
-                    dataFim = "lt.${dataQuery}T23:59:59",
+                val filtro = SupabaseApi.RpcDataFiltro(data_filtro = dataQuery)
+
+                // 2. Chame a nova função da API
+                val response = SupabaseClient.api.buscarEventosPorData(
+                    body = filtro,
                     apiKey = SupabaseConfig.SUPABASE_KEY,
                     bearer = "Bearer ${SupabaseConfig.SUPABASE_KEY}"
                 )
 
                 if (response.isSuccessful) {
-                    val lista = response.body() ?: kotlin.collections.emptyList()
+                    val lista = response.body() ?: emptyList()
                     adapter.atualizarLista(lista)
                 } else {
-                    Toast.makeText(this@EventoDiarioActivity, "Erro ao carregar eventos: ${response.code()}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@EventoDiarioActivity,
+                        "Erro ao carregar eventos: ${response.code()}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             } catch (e: Exception) {
-                Toast.makeText(this@EventoDiarioActivity, "Falha na conexão: ${e.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    this@EventoDiarioActivity,
+                    "Falha na conexão: ${e.message}",
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
     }
