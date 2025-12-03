@@ -1,5 +1,6 @@
 package com.example.library
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.*
@@ -85,8 +86,21 @@ class RegistrarLivroActivity : AppCompatActivity() {
                     )
 
                     if (response.isSuccessful) {
-                        Toast.makeText(this@RegistrarLivroActivity, "Livro registrado com sucesso!", Toast.LENGTH_SHORT).show()
-                        finish()
+                        val livroRegistrado = response.body()?.firstOrNull()
+                        if (livroRegistrado != null) {
+                            Toast.makeText(this@RegistrarLivroActivity, "Livro registrado com sucesso! Cadastre o primeiro exemplar.", Toast.LENGTH_LONG).show()
+                            val intent = Intent(
+                                this@RegistrarLivroActivity,
+                                AddEditExemplarActivity::class.java
+                            ).apply {
+                                putExtra("LIVRO_ID", livroRegistrado.id)
+                            }
+                            startActivity(intent)
+                            finish()
+                        } else {
+                            Toast.makeText(this@RegistrarLivroActivity, "Livro registrado, mas ID não retornado. Tente cadastrar o exemplar manualmente.", Toast.LENGTH_LONG).show()
+                            finish()
+                        }
                     } else {
                         Toast.makeText(this@RegistrarLivroActivity, "Erro ao registrar livro: ${response.errorBody()?.string()}", Toast.LENGTH_LONG).show()
                     }

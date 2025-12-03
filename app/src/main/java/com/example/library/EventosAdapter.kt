@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import java.text.SimpleDateFormat
 import java.util.*
 
-class EventosAdapter(private var eventos: List<Evento>) :
+class EventosAdapter(private var eventos: List<Evento>, private val onEventoClick: (Evento) -> Unit) :
     RecyclerView.Adapter<EventosAdapter.EventoViewHolder>() {
 
     class EventoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -40,7 +40,9 @@ class EventosAdapter(private var eventos: List<Evento>) :
             holder.tvDataHora.text = "Data/Hora: ${evento.dataHora}"
         }
 
-        // TODO: Adicionar listener de clique para abrir detalhes do evento
+        holder.itemView.setOnClickListener {
+            onEventoClick(evento)
+        }
     }
 
     override fun getItemCount() = eventos.size

@@ -11,4 +11,12 @@
     <string name="voltar">Voltar</string>
     <string name="hint_pesquisa">Que livro você está procurando?</string>
 
+    <string name="back_button_description">Botão de voltar</string>
+    <string name="add_exemplar_button_description">Adicionar novo exemplar</string>
+    <string name="edit_button_description">Editar exemplar</string>
+    <string name="delete_button_description">Excluir exemplar</string>
+    <string name="gerenciar_exemplares">Gerenciar Exemplares</string>
+    <string name="cadastrar_exemplar">Cadastrar Exemplar</string>
+    <string name="editar_exemplar">Editar Exemplar</string>
+
 </resources>

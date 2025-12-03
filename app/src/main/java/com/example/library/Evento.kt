@@ -11,4 +11,4 @@ data class Evento(
     @SerializedName("descricao") val descricao: String,
     @SerializedName("created_at") val createdAt: String? = null,
     @SerializedName("imagem_url") val imagemUrl: String? = null
-)
+) : java.io.Serializable

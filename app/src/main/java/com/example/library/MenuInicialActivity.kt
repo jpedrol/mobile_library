@@ -43,7 +43,6 @@ class MenuInicialActivity : AppCompatActivity() {
         val itemMenuInicial    = findViewById<LinearLayout>(R.id.itemMenuInicial)
         val itemSair           = findViewById<LinearLayout>(R.id.itemSair)
         val itemEventos        = findViewById<LinearLayout>(R.id.itemEventos)
-        val itemAluguelCabines = findViewById<LinearLayout>(R.id.itemAluguelCabines)
         val itemAdmin          = findViewById<LinearLayout>(R.id.itemAdmin)
 
         btnMenu.setOnClickListener {
@@ -78,12 +77,8 @@ class MenuInicialActivity : AppCompatActivity() {
             startActivity(Intent(this, EventosActivity::class.java))
         }
 
-        itemAluguelCabines.setOnClickListener {
-            closeDrawer()
-            startActivity(Intent(this, CabinesActivity::class.java))
-        }
 
-        // Lógica para exibir o item de Admin apenas para administradores
+
         if (SessionManager.isAdmin(this)) {
             itemAdmin.visibility = View.VISIBLE
             itemAdmin.setOnClickListener {

@@ -46,7 +46,10 @@
         <activity android:name=".AdminActivity" />
         <activity android:name=".CabinesActivity" />
         <activity android:name=".EventosActivity" />
+        <activity android:name=".RegistroEventoActivity" />
         <activity android:name=".EditarLivroActivity" />
+        <activity android:name=".ExemplaresAdminActivity" />
+        <activity android:name=".AddEditExemplarActivity" />
 
         <activity
             android:name=".ChatBotActivity"

@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.CalendarView
 import android.widget.Toast
+import android.content.Intent
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +21,8 @@ import java.util.*
 
 class EventosActivity : AppCompatActivity() {
 
+    private lateinit var eventRegistrationLauncher: ActivityResultLauncher<Intent>
+
     private lateinit var calendarView: CalendarView
     private lateinit var rvEventos: RecyclerView
     private lateinit var fabAdicionarEvento: FloatingActionButton
@@ -29,12 +34,27 @@ class EventosActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_eventos)
 
+        // Inicializa o launcher para receber o resultado da Activity de registro
+        eventRegistrationLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                // Evento salvo/excluído com sucesso, recarregar a lista
+                carregarTodosEventos()
+                Toast.makeText(this, "Lista de eventos atualizada.", Toast.LENGTH_SHORT).show()
+            }
+        }
+
         calendarView = findViewById(R.id.calendarView)
         rvEventos = findViewById(R.id.rv_eventos)
         fabAdicionarEvento = findViewById(R.id.fab_adicionar_evento)
 
         // Configurar RecyclerView
-        eventosAdapter = EventosAdapter(emptyList())
+        eventosAdapter = EventosAdapter(emptyList()) { evento ->
+            // Listener de clique para edição
+            val intent = Intent(this, RegistroEventoActivity::class.java).apply {
+                putExtra(RegistroEventoActivity.EXTRA_EVENTO, evento)
+            }
+            eventRegistrationLauncher.launch(intent)
+        }
         rvEventos.layoutManager = LinearLayoutManager(this)
         rvEventos.adapter = eventosAdapter
 
@@ -53,8 +73,8 @@ class EventosActivity : AppCompatActivity() {
         if (SessionManager.isAdmin(this)) {
             fabAdicionarEvento.visibility = View.VISIBLE
             fabAdicionarEvento.setOnClickListener {
-                // TODO: Iniciar a Activity de registro de evento aqui
-                Toast.makeText(this, "Funcionalidade de adicionar evento (apenas para bibliotecários/administradores) - Implementar Activity de Registro", Toast.LENGTH_LONG).show()
+                val intent = Intent(this, RegistroEventoActivity::class.java)
+                eventRegistrationLauncher.launch(intent)
             }
         } else {
             fabAdicionarEvento.visibility = View.GONE

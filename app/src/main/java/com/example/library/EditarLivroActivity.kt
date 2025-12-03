@@ -1,5 +1,6 @@
 package com.example.library
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.*
@@ -56,10 +57,20 @@ class EditarLivroActivity : AppCompatActivity() {
             return
         }
 
+        val btnGerenciarExemplares = findViewById<Button>(R.id.btnGerenciarExemplares)
+        btnGerenciarExemplares.visibility = Button.VISIBLE
         btnRegistrar.text = "Salvar alterações"
 
 
         carregarLivro(livroId, inputTitulo, inputAutor, inputIdioma)
+
+        btnGerenciarExemplares.setOnClickListener {
+            val intent = Intent(this, ExemplaresAdminActivity::class.java).apply {
+                putExtra("LIVRO_ID", livroId)
+                putExtra("LIVRO_TITULO", inputTitulo.text.toString())
+            }
+            startActivity(intent)
+        }
 
         btnAddCapa.setOnClickListener {
             selecionarImagemLauncher.launch("image/*")
