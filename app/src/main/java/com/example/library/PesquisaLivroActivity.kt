@@ -21,28 +21,22 @@ class PesquisaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pesquisa_livro)
 
-        // TOP BAR
         val btnVoltar     = findViewById<ImageButton>(R.id.btnVoltar)
         val btnSearch     = findViewById<ImageButton>(R.id.btnSearch)
         val txtPesquisa   = findViewById<EditText>(R.id.txtPesquisa)
 
-        // ÁREA ADMIN
         val adminCrudContainer = findViewById<LinearLayout>(R.id.adminCrudContainer)
         val btnAddBook         = findViewById<Button>(R.id.btnAddBook)
 
-        // Lista de livros
         recyclerLivros = findViewById(R.id.recyclerLivros)
         recyclerLivros.layoutManager = LinearLayoutManager(this)
 
-        // Verifica se é admin
         val prefs = getSharedPreferences("auth_prefs", MODE_PRIVATE)
         val role = prefs.getString("role", "user")
         isAdmin = (role == "admin")
 
-        // Mostra funções de admin apenas se for admin
         adminCrudContainer.visibility = if (isAdmin) View.VISIBLE else View.GONE
 
-        // Botão adicionar livro (somente admin)
         btnAddBook.setOnClickListener {
             if (isAdmin) {
                 startActivity(Intent(this, RegistrarLivroActivity::class.java))
@@ -51,13 +45,11 @@ class PesquisaActivity : AppCompatActivity() {
             }
         }
 
-        // Botão voltar
         btnVoltar.setOnClickListener {
             startActivity(Intent(this, MenuInicialActivity::class.java))
             finish()
         }
 
-        // Botão pesquisar
         btnSearch.setOnClickListener {
             val texto = txtPesquisa.text.toString().trim()
             if (texto.isNotEmpty()) {
@@ -69,10 +61,9 @@ class PesquisaActivity : AppCompatActivity() {
             }
         }
 
-        // CONFIGURA O ADAPTER (agora com verificação de ADMIN)
         adapter = BookAdapter(
             listaLivros,
-            isAdmin = isAdmin,  // <-- ENVIA PARA O ADAPTER
+            isAdmin = isAdmin,
             onEdit = { livro, index ->
                 if (isAdmin) {
                     val intent = Intent(this, EditarLivroActivity::class.java)

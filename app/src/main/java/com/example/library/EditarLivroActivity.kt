@@ -43,7 +43,6 @@ class EditarLivroActivity : AppCompatActivity() {
         val arr = JSONArray(prefs.getString("books_list", "[]"))
         val obj = arr.getJSONObject(indexLivro)
 
-        // preencher campos
         inputTitulo.setText(obj.getString("title"))
         inputAutor.setText(obj.getString("author"))
         inputIdioma.setText(obj.getString("language"))
@@ -58,7 +57,6 @@ class EditarLivroActivity : AppCompatActivity() {
             selecionarImagemLauncher.launch("image/*")
         }
 
-        // botão agora SALVA ALTERAÇÕES
         btnRegistrar.text = "Salvar alterações"
 
         btnRegistrar.setOnClickListener {
@@ -69,18 +67,15 @@ class EditarLivroActivity : AppCompatActivity() {
             val caminhoCapa = capaUriSelecionada?.let { salvarImagemLocal(it) }
                 ?: capa
 
-            // atualizar JSON
             val novo = obj
             novo.put("title", titulo)
             novo.put("author", autor)
             novo.put("language", idioma)
             novo.put("coverUri", caminhoCapa)
 
-            // atualizar JSON
             arr.put(indexLivro, novo)
             prefs.edit().putString("books_list", arr.toString()).apply()
 
-            // atualizar repositório
             LivroRepository.livros[indexLivro] =
                 Book(titulo, autor, idioma, caminhoCapa)
 

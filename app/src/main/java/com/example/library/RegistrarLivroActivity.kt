@@ -15,7 +15,6 @@ class RegistrarLivroActivity : AppCompatActivity() {
     private var capaUriSelecionada: Uri? = null
     private lateinit var imgPreview: ImageView
 
-    // PICKER USA O EXPLORADOR DE ARQUIVOS
     private val selecionarImagemLauncher =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
             if (uri != null) {
@@ -34,12 +33,10 @@ class RegistrarLivroActivity : AppCompatActivity() {
         val inputAutor = findViewById<EditText>(R.id.inputAutor)
         val inputIdioma = findViewById<EditText>(R.id.inputIdioma)
 
-        // container clicável da capa
         val btnAddCapa = findViewById<FrameLayout>(R.id.btnAddCapa)
         val btnRegistrar = findViewById<Button>(R.id.btnRegistrarLivro)
         imgPreview = findViewById(R.id.imgPreview)
 
-        // voltar
         findViewById<ImageButton>(R.id.btnVoltar).setOnClickListener {
             finish()
         }
@@ -72,7 +69,6 @@ class RegistrarLivroActivity : AppCompatActivity() {
             arr.put(novoObj)
             prefs.edit().putString("books_list", arr.toString()).apply()
 
-            // ATUALIZA REPOSITÓRIO
             LivroRepository.livros.add(
                 Book(titulo, autor, idioma, caminhoLocal)
             )
@@ -82,7 +78,6 @@ class RegistrarLivroActivity : AppCompatActivity() {
         }
     }
 
-    // ---------- SALVA A CAPA EM /files/book_covers ----------
     private fun salvarImagemLocal(uri: Uri): String? {
         return try {
             val input = contentResolver.openInputStream(uri) ?: return null

@@ -20,7 +20,6 @@
             android:background="@drawable/bg_section_card"
             android:elevation="10dp">
 
-            <!-- TÍTULO -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -32,7 +31,6 @@
                 android:gravity="center"
                 android:padding="10dp" />
 
-            <!-- CAPA -->
             <ImageView
                 android:id="@+id/imgPopupCapa"
                 android:layout_width="150dp"
@@ -41,7 +39,6 @@
                 android:layout_marginTop="16dp"
                 android:scaleType="centerCrop" />
 
-            <!-- TÍTULO DO LIVRO -->
             <TextView
                 android:id="@+id/tvPopupTitulo"
                 android:layout_width="match_parent"
@@ -53,7 +50,6 @@
                 android:gravity="center"
                 android:layout_marginTop="8dp" />
 
-            <!-- USUÁRIO -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -76,7 +72,6 @@
                     android:layout_marginStart="8dp" />
             </LinearLayout>
 
-            <!-- LINHA COM OS DOIS DATEPICKERS -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -84,7 +79,6 @@
                 android:gravity="center"
                 android:layout_marginTop="20dp">
 
-                <!-- BLOCO DATA INÍCIO -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_weight="1"
@@ -107,7 +101,6 @@
                         android:calendarViewShown="false" />
                 </LinearLayout>
 
-                <!-- BLOCO DATA FIM -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_weight="1"
@@ -132,7 +125,6 @@
 
             </LinearLayout>
 
-            <!-- BOTÃO CONFIRMAR -->
             <Button
                 android:id="@+id/btnPopupConfirmar"
                 android:layout_width="match_parent"
@@ -143,7 +135,6 @@
                 android:textStyle="bold"
                 android:layout_marginTop="20dp" />
 
-            <!-- CANCELAR -->
             <TextView
                 android:id="@+id/btnPopupFechar"
                 android:layout_width="match_parent"

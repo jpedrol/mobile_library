@@ -3,61 +3,111 @@ package com.example.library
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import com.example.library.data.supabase.SupabaseClient
+import com.example.library.data.supabase.SupabaseConfig
+import kotlinx.coroutines.launch
 
 class LoguinActivity : AppCompatActivity() {
 
     companion object {
-        private const val ADMIN_MATRICULA = "0"
-        private const val ADMIN_SENHA = "admin123"
-
         private const val PREFS_NAME = "auth_prefs"
         private const val KEY_ROLE = "role"
         private const val KEY_MATRICULA = "matricula"
     }
 
+    private lateinit var btnEntrar: Button
+    private lateinit var linkRegistrar: TextView
+    private lateinit var inputMatricula: EditText
+    private lateinit var inputSenha: EditText
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_loguin)
 
-        val btnEntrar = findViewById<Button>(R.id.btnEntrar)
-        val linkRegistrar = findViewById<TextView>(R.id.linkRegistrar)
-
-        val inputMatricula = findViewById<EditText>(R.id.inputMatricula)
-        val inputSenha = findViewById<EditText>(R.id.inputSenha)
+        btnEntrar = findViewById(R.id.btnEntrar)
+        linkRegistrar = findViewById(R.id.linkRegistrar)
+        inputMatricula = findViewById(R.id.inputMatricula)
+        inputSenha = findViewById(R.id.inputSenha)
 
         btnEntrar.setOnClickListener {
+
             try {
                 val matricula = inputMatricula.text.toString().trim()
-                val senha = inputSenha.text.toString().trim()
+                val senha     = inputSenha.text.toString().trim()
 
                 if (matricula.isEmpty() || senha.isEmpty()) {
                     Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
 
-                // 🍀 LÓGICA: ADMIN OU USER?
-                val role = if (matricula == ADMIN_MATRICULA && senha == ADMIN_SENHA) {
-                    "admin"
-                } else {
-                    "user"
+                val senhaHash = senha
+
+                lifecycleScope.launch {
+                    try {
+                        btnEntrar.isEnabled = false
+
+                        val response = SupabaseClient.api.loginUsuario(
+                            matriculaFilter = "eq.$matricula",
+                            senhaFilter = "eq.$senhaHash",
+                            apiKey = SupabaseConfig.SUPABASE_KEY,
+                            bearer = "Bearer ${SupabaseConfig.SUPABASE_KEY}"
+                        )
+
+                        btnEntrar.isEnabled = true
+
+                        if (!response.isSuccessful) {
+                            Toast.makeText(
+                                this@LoguinActivity,
+                                "Erro ao conectar no servidor (${response.code()})",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            return@launch
+                        }
+
+                        val usuarios = response.body() ?: emptyList()
+
+                        if (usuarios.isEmpty()) {
+                            Toast.makeText(
+                                this@LoguinActivity,
+                                "Matrícula ou senha inválidos",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            return@launch
+                        }
+
+                        val usuario = usuarios[0]
+
+                        val role = if (usuario.tipo_usuario.uppercase() == "ADMIN") {
+                            "admin"
+                        } else {
+                            "user"
+                        }
+
+                        val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+                        prefs.edit()
+                            .putString(KEY_ROLE, role)
+                            .putString(KEY_MATRICULA, usuario.matricula)
+                            .apply()
+
+                        startActivity(
+                            Intent(this@LoguinActivity, MenuInicialActivity::class.java)
+                        )
+                        finish()
+
+                    } catch (e: Exception) {
+                        btnEntrar.isEnabled = true
+                        Log.e("LoguinActivity", "Erro na chamada Supabase", e)
+                        Toast.makeText(
+                            this@LoguinActivity,
+                            "Erro ao fazer login: ${e.message}",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    } finally {
+                    }
                 }
-
-                // 💾 salvar localmente o papel do usuário
-                val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
-                prefs.edit()
-                    .putString(KEY_ROLE, role)
-                    .putString(KEY_MATRICULA, matricula)
-                    .apply()
-
-                // 👉 Agora todos vão para a mesma tela Home
-                startActivity(Intent(this, MenuInicialActivity::class.java))
-
-                finish()
 
             } catch (e: Exception) {
                 Log.e("LoguinActivity", "Erro ao abrir a próxima tela", e)
