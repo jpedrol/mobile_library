@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">Library</string>
     <string name="menu">Menu</string>
     <string name="descricao_botao_menu">Abrir menu lateral</string>
@@ -10,5 +11,10 @@
     <string name="pesquisar">Pesquisar</string>
     <string name="voltar">Voltar</string>
     <string name="hint_pesquisa">Que livro você está procurando?</string>
+    <string name="eventos">Eventos\n</string>
+    <string name="imagem_do_evento">Banner do evento\n</string>
+    <string name="eventos_do_m_s">Eventos do Mês</string>
+    <string name="dia_do_evento">25</string>
+    <string name="descricao">Descrição ou cargo do convidado</string>
 
 </resources>

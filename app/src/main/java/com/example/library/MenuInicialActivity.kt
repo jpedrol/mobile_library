@@ -59,7 +59,7 @@ class MenuInicialActivity : AppCompatActivity() {
         }
 
         tvCalendario.setOnClickListener {
-            startActivity(Intent(this, EventosActivity::class.java))
+            startActivity(Intent(this, EventosMensaisActivity::class.java))
         }
 
         fun closeDrawer() = drawerLayout.closeDrawer(GravityCompat.START)

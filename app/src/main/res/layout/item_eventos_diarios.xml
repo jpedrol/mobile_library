@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="0dp"
+    app:cardBackgroundColor="@android:color/transparent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:gravity="center_vertical">
+
+        <!-- 1. Imagem do Evento -->
+        <ImageView
+            android:id="@+id/ivEvento"
+            android:layout_width="70dp"
+            android:layout_height="90dp"
+            android:scaleType="centerCrop"
+            android:layout_marginEnd="16dp"
+            android:background="#E0E0E0"
+            android:contentDescription="@string/imagem_do_evento" />
+
+        <!-- 2. Bloco de Informações -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- Nome do Evento -->
+            <TextView
+                android:id="@+id/tvNomeEvento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#333333"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:maxLines="2"
+                android:ellipsize="end"
+                tools:text="Nome do Evento Principal"/>
+
+            <!-- Tipo do Evento -->
+            <TextView
+                android:id="@+id/tvTipoEvento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textColor="#666666"
+                android:textSize="13sp"
+                tools:text="Tipo do Evento" />
+
+
+            <!-- Detalhes: Horário e Local -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="6dp">
+
+                <!-- Horário -->
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:src="@drawable/clock_outline"
+                    app:tint="#888888"/>
+                <TextView
+                    android:id="@+id/tvHorarioEvento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="16dp"
+                    android:textColor="#888888"
+                    android:textSize="12sp"
+                    tools:text="19:00"/>
+
+                <!-- Local -->
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/map_marker_outline"
+                    app:tint="#888888"/>
+                <TextView
+                    android:id="@+id/tvLocalEvento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:textColor="#888888"
+                    android:textSize="12sp"
+                    tools:text="Piso Superior"/>
+            </LinearLayout>
+
+            <!-- Convidados -->
+            <LinearLayout
+                android:id="@+id/layoutConvidados"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="4dp"
+                android:gravity="center_vertical"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/group_outline"
+                    app:tint="#888888"/>
+                <TextView
+                    android:id="@+id/tvConvidadosEvento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:textColor="#888888"
+                    android:textSize="12sp"
+                    tools:text="Fulano de Tal +2"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- 3. Seta para Detalhes -->
+        <ImageView
+            android:id="@+id/iconeSeta"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:contentDescription="Visualizar detalhes"
+            android:src="@drawable/chevron_right"
+            app:tint="#BDBDBD" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -190,42 +190,63 @@ interface SupabaseApi {
 
     // ================= EVENTOS =================
 
-    @GET("eventos")
-    suspend fun getEventos(
-        @Query("select") select: String = "*",
-        @Header("apikey") apiKey: String,
-        @Header("Authorization") bearer: String
-    ): Response<List<Evento>>
-
     @Headers("Prefer: return=representation")
     @POST("eventos")
     suspend fun registrarEvento(
-        @Body novoEvento: Evento,
+        @Body novoEvento: EventoInsert,
         @Header("apikey") apiKey: String,
         @Header("Authorization") bearer: String
     ): Response<List<Evento>>
 
     @Headers("Prefer: return=representation")
-    @PATCH("eventos")
-    suspend fun atualizarEvento(
-        @Query("id") idFilter: String,
-        @Body evento: Evento,
+    @POST("convidados_eventos")
+    suspend fun registrarConvidado(
+        @Body novoConvidado: ConvidadoInsert,
+        @Header("apikey") apiKey: String,
+        @Header("Authorization") bearer: String
+    ): Response<List<Convidado>>
+
+    @POST("rpc/buscar_eventos_do_mes")
+    suspend fun buscarEventosDoMes(
+        @Body body: RpcMesFiltro,
+        @Header("apikey") apiKey: String,
+        @Header("Authorization") bearer: String
+    ): Response<List<Evento>>
+
+    @POST("rpc/buscar_eventos_por_data")
+    suspend fun buscarEventosPorData(
+        @Body body: RpcDataFiltro,
         @Header("apikey") apiKey: String,
         @Header("Authorization") bearer: String
     ): Response<List<Evento>>
 
     @DELETE("eventos")
     suspend fun deletarEvento(
-        @Query("id") idFilter: String,
+        @Query("id") idFiltro: String,
         @Header("apikey") apiKey: String,
         @Header("Authorization") bearer: String
     ): Response<Unit>
 
     @Headers("Prefer: return=representation")
-    @POST("convidados_eventos")
-    suspend fun registrarConvidado(
-        @Body novoConvidado: ConvidadoEvento,
+    @PATCH("eventos")
+    suspend fun atualizarEvento(
+        @Query("id") idFiltro: String,
+        @Body body: EventoUpdate,
         @Header("apikey") apiKey: String,
         @Header("Authorization") bearer: String
-    ): Response<List<ConvidadoEvento>>
-}
+    ): Response<List<Evento>>
+
+    @GET("convidados_eventos")
+    suspend fun buscarConvidadosPorEvento(
+        @Query("evento_id") idEventoFiltro: String,
+        @Query("select") select: String = "*",
+        @Header("apikey") apiKey: String,
+        @Header("Authorization") bearer: String
+    ): Response<List<Convidado>>
+
+    @DELETE("convidados_eventos")
+    suspend fun deletarConvidadosPorEvento(
+        @Query("evento_id") idEventoFiltro: String,
+        @Header("apikey") apiKey: String,
+        @Header("Authorization") bearer: String
+    ): Response<Unit>

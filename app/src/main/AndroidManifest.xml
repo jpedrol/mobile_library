@@ -79,6 +79,11 @@
             android:name=".AvaliacaoLivroActivity"
             android:exported="false" />
 
+        <activity android:name=".EventosMensaisActivity" />
+        <activity android:name=".EventoDiarioActivity" />
+        <activity android:name=".FormularioEventosActivity" />
+        <activity android:name=".AprovacoesActivity" />
+        <activity android:name=".DetalhesEventoActivity" />
     </application>
 
 </manifest>
