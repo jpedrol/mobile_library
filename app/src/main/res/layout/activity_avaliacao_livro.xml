@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- ⬅️ BOTÃO DE VOLTAR -->
         <ImageButton
             android:id="@+id/btnVoltar"
             android:layout_width="40dp"
@@ -24,7 +23,6 @@
             android:layout_gravity="start"
             android:padding="4dp"/>
 
-        <!-- CAIXA BRANCA CENTRAL -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -35,7 +33,6 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="24dp">
 
-            <!-- BARRA PRETA DO TÍTULO -->
             <TextView
                 android:id="@+id/tvTituloAvaliacao"
                 android:layout_width="match_parent"
@@ -47,7 +44,6 @@
                 android:padding="8dp"
                 android:textStyle="bold" />
 
-            <!-- Texto pergunta -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -56,7 +52,6 @@
                 android:textSize="16sp"
                 android:layout_marginTop="16dp" />
 
-            <!-- RATINGBAR -->
             <RatingBar
                 android:id="@+id/ratingBar"
                 android:layout_width="wrap_content"
@@ -68,7 +63,6 @@
                 android:layout_marginTop="8dp"
                 android:progressTint="@color/gold_metallic"/>
 
-            <!-- Texto descrever -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -77,7 +71,6 @@
                 android:textSize="16sp"
                 android:layout_marginTop="24dp" />
 
-            <!-- CAMPO DE COMENTÁRIO -->
             <EditText
                 android:id="@+id/edtComentario"
                 android:layout_width="match_parent"
@@ -91,7 +84,6 @@
                 android:maxLines="5"
                 android:scrollbars="vertical" />
 
-            <!-- BOTÃO AZUL CLARO IGUAL AO PRINT -->
             <Button
                 android:id="@+id/btnEnviarAvaliacao"
                 android:layout_width="match_parent"

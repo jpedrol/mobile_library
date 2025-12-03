@@ -37,7 +37,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/eventos"
+                android:text="@string/eventos_do_m_s"
                 android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -49,16 +49,11 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- 🔹 Conteúdo principal -->
-    <androidx.cardview.widget.CardView
+    <!-- 🔹 Conteúdo principal com SwipeRefresh -->
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayoutMensal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="2dp"
-        android:backgroundTint="#FFFFFF">
+        android:layout_height="match_parent">
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -68,55 +63,114 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
+                android:orientation="vertical">
 
-                <!-- 🔸 Calendário -->
-                <CalendarView
-                    android:id="@+id/calendarView"
+                <!-- Calendário -->
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="270dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
-                    android:dateTextAppearance="@style/TextAppearance.AppCompat.Small" />
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    android:backgroundTint="#FFFFFF">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#E0E0E0"
-                    android:layout_marginBottom="16dp" />
+                    <CalendarView
+                        android:id="@+id/calendarView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </androidx.cardview.widget.CardView>
 
-
-                <!-- 🔸 Título dos próximos eventos --><RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/tvTituloEventosDia"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/eventos"
-                    android:textColor="#000"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    tools:ignore="RelativeOverlap" />
-
-                <ImageButton
-                    android:id="@+id/botaoAddEvento"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentEnd="true"
-                    android:background="@drawable/btn_add_evento"
-                    android:contentDescription="Adicionar eveneto"/>
-            </RelativeLayout>
-                <!-- 🔸 RecyclerView dos próximos eventos -->
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerEventosMes"
+                <!-- Lista de Eventos do Mês -->
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false"
-                    tools:listitem="@layout/item_eventos_mes"
-                    tools:itemCount="3" />
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:minHeight="200dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    android:backgroundTint="#FFFFFF">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="16dp">
+
+                        <!-- Título da lista e botão Adicionar -->
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/eventos"
+                                android:textColor="#000"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:layout_centerVertical="true"
+                                tools:ignore="RelativeOverlap" />
+
+                            <!-- ✅ BOTÃO DE ADICIONAR EVENTO POSICIONADO -->
+                            <ImageButton
+                                android:id="@+id/botaoAddEvento"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:background="@drawable/btn_add_evento"
+                                android:contentDescription="Adicionar evento"
+                                android:visibility="gone"
+                                tools:visibility="visible"/>
+                        </RelativeLayout>
+
+                        <!-- RecyclerView e Estado Vazio -->
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="40dp">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recyclerEventosMes"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:nestedScrollingEnabled="false"
+                                tools:listitem="@layout/item_eventos_mes"
+                                tools:itemCount="3" />
+
+                            <LinearLayout
+                                android:id="@+id/emptyStateLayout"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:visibility="gone"
+                                tools:visibility="visible">
+
+                                <ImageView
+                                    android:layout_width="70dp"
+                                    android:layout_height="70dp"
+                                    android:src="@drawable/calendar_blank"
+                                    android:layout_marginBottom="16dp"
+                                    app:tint="#BDBDBD"
+                                    android:contentDescription="@null" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Nenhum evento para este mês"
+                                    android:textColor="#757575"
+                                    android:textSize="16sp"/>
+                            </LinearLayout>
+                        </FrameLayout>
+                    </FrameLayout>
+                </androidx.cardview.widget.CardView>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
-    </androidx.cardview.widget.CardView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </LinearLayout>

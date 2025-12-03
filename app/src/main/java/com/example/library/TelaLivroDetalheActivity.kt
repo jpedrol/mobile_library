@@ -20,16 +20,14 @@ class TelaLivroDetalheActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tela_livro_detalhe)
 
-        // --- BOTÃO DE VOLTAR (CORRIGIDO) ---
         val btnVoltar = findViewById<ImageButton>(R.id.btnVoltar)
         btnVoltar.setOnClickListener {
-            finish() // ← volta exatamente para a tela anterior
+            finish()
         }
 
         layoutAvaliacoes = findViewById(R.id.layoutAvaliacoes)
         tvResumoAvaliacoes = findViewById(R.id.tvResumoAvaliacoes)
 
-        // recebe dados enviados via intent
         intent.getStringExtra("tituloLivro")?.let {
             if (it.isNotBlank()) tituloLivro = it
         }
@@ -37,7 +35,6 @@ class TelaLivroDetalheActivity : AppCompatActivity() {
         val capaExtra = intent.getIntExtra("capaResId", 0)
         if (capaExtra != 0) capaResId = capaExtra
 
-        // tenta preencher título/capa da tela se existirem
         val idTitulo = resources.getIdentifier("tvTituloLivro", "id", packageName)
         if (idTitulo != 0) {
             val tvTitulo = findViewById<TextView>(idTitulo)

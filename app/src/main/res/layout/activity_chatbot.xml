@@ -8,7 +8,6 @@
     android:padding="16dp"
     android:background="@color/white">
 
-    <!-- BOTÃO VOLTAR -->
     <ImageButton
         android:id="@+id/btnVoltar"
         android:layout_width="50dp"
@@ -19,7 +18,6 @@
         android:src="@drawable/baseline_arrow_back_24"
         android:tint="@color/black" />
 
-    <!-- LOGO + TÍTULOS -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,7 +46,6 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
-    <!-- CHIPS -->
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -56,7 +53,6 @@
         android:layout_marginTop="12dp">
     </HorizontalScrollView>
 
-    <!-- LISTA CHAT -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvMessages"
         android:layout_width="match_parent"
@@ -68,7 +64,6 @@
         android:requiresFadingEdge="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-    <!-- BARRA INFERIOR: input + botão enviar -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

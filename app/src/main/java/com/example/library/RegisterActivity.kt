@@ -9,6 +9,8 @@ import com.example.library.data.supabase.SupabaseClient
 import com.example.library.data.supabase.SupabaseConfig
 import com.example.library.data.supabase.UsuarioInsert
 import kotlinx.coroutines.launch
+import android.content.Intent
+
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -31,6 +33,15 @@ class RegisterActivity : AppCompatActivity() {
         etConfirmarSenha = findViewById(R.id.etConfirmarSenha)
         btnRegistrar = findViewById(R.id.btnRegistrar)
         progressBar = findViewById(R.id.progressBar)
+
+        val btnBack = findViewById<ImageButton>(R.id.btnBack)
+
+        btnBack.setOnClickListener {
+            val intent = Intent(this, LoguinActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
 
         btnRegistrar.setOnClickListener {
 
@@ -95,7 +106,7 @@ class RegisterActivity : AppCompatActivity() {
                             "Usuário cadastrado: ${usuario.nome_completo}",
                             Toast.LENGTH_SHORT
                         ).show()
-                        finish() // volta para login
+                        finish()
                     } else {
                         Toast.makeText(this@RegisterActivity, "Erro: sem retorno", Toast.LENGTH_SHORT).show()
                     }

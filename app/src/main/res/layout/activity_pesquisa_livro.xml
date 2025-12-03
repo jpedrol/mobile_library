@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:background="@color/blue">
 
-    <!-- TOP BAR -->
     <RelativeLayout
         android:id="@+id/topBar"
         android:layout_width="match_parent"
@@ -64,7 +63,6 @@
         </LinearLayout>
     </RelativeLayout>
 
-    <!-- ÁREA DO ADMIN – VISÍVEL APENAS SE FOR ADMIN -->
     <LinearLayout
         android:id="@+id/adminCrudContainer"
         android:layout_width="match_parent"
@@ -88,7 +86,6 @@
             android:elevation="4dp"/>
     </LinearLayout>
 
-    <!-- LISTA DE LIVROS -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerLivros"
         android:layout_width="match_parent"

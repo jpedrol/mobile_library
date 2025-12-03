@@ -14,7 +14,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MenuInicialActivity : AppCompatActivity() {
 
-    // trava o swipe lateral, deixando o menu abrir só pelo botão
     private fun DrawerLayout.disableSwipeGesture() {
         setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
     }
@@ -23,10 +22,8 @@ class MenuInicialActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu_inicial)
 
-        // carrega livros do SharedPreferences para o repositório em memória
         LivroRepository.carregarLivros(this)
 
-        // ---------- RECOMENDADOS (HOME) ----------
         val rvRecomendados = findViewById<RecyclerView>(R.id.rvRecomendados)
         val livros = LivroRepository.livros
 
@@ -37,12 +34,10 @@ class MenuInicialActivity : AppCompatActivity() {
             RecomendadosHomeAdapter(livros) { position ->
                 val livro = livros[position]
                 val intent = Intent(this, TelaLivroDetalheActivity::class.java)
-                // por enquanto mandamos só o título (usado nas avaliações)
                 intent.putExtra("tituloLivro", livro.title)
                 startActivity(intent)
             }
 
-        // ---------- MENU LATERAL E BOTÕES ----------
         val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
         drawerLayout.disableSwipeGesture()
 
@@ -55,12 +50,10 @@ class MenuInicialActivity : AppCompatActivity() {
         val itemMenuInicial    = findViewById<LinearLayout>(R.id.itemMenuInicial)
         val itemSair           = findViewById<LinearLayout>(R.id.itemSair)
 
-        // abre o menu lateral
         btnMenu.setOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
         }
 
-        // busca
         btnSearch.setOnClickListener {
             startActivity(Intent(this, PesquisaActivity::class.java))
         }
@@ -84,7 +77,6 @@ class MenuInicialActivity : AppCompatActivity() {
             closeDrawer()
         }
 
-        // *** BOTÃO SAIR — DESLOGAR ***
         itemSair.setOnClickListener {
             closeDrawer()
 

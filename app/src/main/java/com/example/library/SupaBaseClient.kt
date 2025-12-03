@@ -1,5 +1,6 @@
 package com.example.library.data.supabase
 
+import com.example.library.SupabaseApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -8,7 +9,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 object SupabaseClient {
 
     val api: SupabaseApi by lazy {
-        // Logger (pra ver requisições no Logcat)
         val logging = HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }

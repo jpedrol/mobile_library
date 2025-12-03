@@ -68,14 +68,12 @@ class ResultadoPesquisaActivity : AppCompatActivity() {
             }
         }
 
-        // Clique do livro PRINCIPAL
         imgLivroPrincipal.setOnClickListener {
             livroPrincipal?.let { livro ->
                 abrirTelaDetalhe(livro)
             }
         }
 
-        // Clique do livro RECOMENDADO
         imgLivroRecomendado.setOnClickListener {
             livroRecomendado?.let { livro ->
                 abrirTelaDetalhe(livro)
@@ -129,11 +127,9 @@ class ResultadoPesquisaActivity : AppCompatActivity() {
             return
         }
 
-        // PRINCIPAL
         livroPrincipal = resultados.first()
         preencherLivroPrincipal(livroPrincipal!!, termo)
 
-        // RECOMENDADO
         val candidatos = todosLivros.filter { it != livroPrincipal }
 
         if (candidatos.isEmpty()) {

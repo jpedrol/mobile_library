@@ -12,5 +12,9 @@
     <string name="voltar">Voltar</string>
     <string name="hint_pesquisa">Que livro você está procurando?</string>
     <string name="eventos">Eventos\n</string>
+    <string name="imagem_do_evento">Banner do evento\n</string>
+    <string name="eventos_do_m_s">Eventos do Mês</string>
+    <string name="dia_do_evento">25</string>
+    <string name="descricao">Descrição ou cargo do convidado</string>
 
 </resources>
