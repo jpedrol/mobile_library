@@ -250,3 +250,4 @@ interface SupabaseApi {
         @Header("apikey") apiKey: String,
         @Header("Authorization") bearer: String
     ): Response<Unit>
+}
